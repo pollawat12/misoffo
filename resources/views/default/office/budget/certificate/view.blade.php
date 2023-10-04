@@ -1,0 +1,358 @@
+@extends('default.layouts.main')
+
+@section('css')
+<link href="{{url('assets/default')}}/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{url('assets/js/plugins/sweetalert/sweetalert.css')}}">
+@endsection
+
+@section('content')
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{{url('/')}}">สรุปภาพรวม</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">จัดการข้อมูล</a></li>
+                            <li class="breadcrumb-item active">การเงิน > ใบสำคัญจ่าย</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">ใบสำคัญจ่าย</h4>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <form action="{{url('office/budget/certificate/save')}}" method="POST" name="frm-save" id="frm-save">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-box">
+                        <h4 class="header-title mb-4"><i class="mdi mdi-file-document-box-plus" style="font-size: 16px !important; "> เพิ่มข้อมูล ใบสำคัญจ่าย</i> </h4>
+
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="edit_id" value="0">
+
+                            <input type="hidden" name="input[type_id]" value="{{$t}}">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="certificate_id">ID <code>*</code></label>
+                                        <input type="text" name="input[certificate_id]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_id}}">
+                                        <small id="certificate_id" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="certificate_num">เลขที่ <code>*</code></label>
+                                        <input type="text" name="input[certificate_num]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_num}}">
+                                        <small id="certificate_num" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="dob">วันที่ <code>*</code></label>
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker-autoclose"  placeholder="วว/ดด/ปปปป"  name="input[certificate_date]" value="@if ($info->certificate_date != NULL){{getDateFormatToInputThai($info->certificate_date)}} @endif">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                </div>
+                                            </div><!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_payfor">จ่ายให้ (บริษัท/ผู้ค้า) <code>*</code></label>
+                                        <select name="input[certificate_payfor]" id="certificate_payfor" class="form-control" style="height: 45px;">
+                                            <option value="">--เลือก--</option>
+                                            @if (count($company) > 0)
+                                            @foreach($company as $keycompany => $valcompany)
+                                            <option value="{{$valcompany->id}}" @if($valcompany['id'] == $info->certificate_payfor) selected @endif>{{$valcompany->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                        <small id="year_id" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_type">ประเภทการจ่าย <code>*</code></label>
+                                        <select name="input[certificate_type] " class="form-control"] style="height: 45px;">
+                                            <option value="">--เลือก--</option>
+                                            <option value="1" @if(1 == $info->certificate_type) selected @endif>โอนเงินผ่านระบบผ่านอิเล็กทรอนิกส์</option>
+                                            <option value="2" @if(2 == $info->certificate_type) selected @endif>เงินสด</option>
+                                            <option value="3" @if(3 == $info->certificate_type) selected @endif>เช็ค</option>
+                                        </select>
+                                        <small id="certificate_type" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_bank_num">บัญชีเลขที่</label>
+                                        <input type="text" name="input[certificate_bank_num]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_bank_num}}">
+                                        <small id="certificate_bank_num" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_bank_name">ธนาคาร </label>
+                                        <input type="text" name="input[certificate_bank_name]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_bank_name}}">
+                                        <small id="certificate_bank_name" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_bank_account">ชื่อบัญชี </label>
+                                        <input type="text" name="input[certificate_bank_account]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_bank_account}}">
+                                        <small id="certificate_bank_account" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_bank_branch">สาขา </label>
+                                        <input type="text" name="input[certificate_bank_branch]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_bank_branch}}"> 
+                                        <small id="certificate_bank_branch" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_check_num">เช็คเลขที่ </label>
+                                        <input type="text" name="input[certificate_check_num]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_check_num}}"> 
+                                        <small id="certificate_check_num" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dob">ลงวันที่ </label>
+                                        <div>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker-autoclose"  placeholder="วว/ดด/ปปปป"  name="input[certificate_check_date]"value="@if ($info->certificate_check_date != NULL){{getDateFormatToInputThai($info->certificate_check_date)}} @endif">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                </div>
+                                            </div><!-- input-group -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="certificate_organizer">ผู้จัดทำ </label>
+                                        <input type="text" name="input[certificate_organizer]" class="form-control" placeholder="" style="height: 45px;"  value="{{$info->certificate_organizer}}"> 
+                                        <small id="certificate_organizer" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="certificate_inspector">ผู้ตรวจ </label>
+                                        <input type="text" name="input[certificate_inspector]" class="form-control" placeholder="" style="height: 45px;"  value="{{$info->certificate_inspector}}"> 
+                                        <small id="certificate_inspector" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="certificate_approver">ผู้อนุมัติ </label>
+                                        <input type="text" name="input[certificate_approver]" class="form-control" placeholder="" style="height: 45px;"  value="{{$info->certificate_approver}}"> 
+                                        <small id="certificate_approver" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_payer">ผู้จ่ายเงิน </label>
+                                        <input type="text" name="input[certificate_payer]" class="form-control" placeholder="" style="height: 45px;"  value="{{$info->certificate_recipient}}"> 
+                                        <small id="certificate_payer" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="certificate_recipient">ผู้รับเอกสาร </label>
+                                        <input type="text" name="input[certificate_recipient]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->certificate_recipient}}"> 
+                                        <small id="certificate_recipient" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+                <!-- end col -->
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h4 class="header-title">
+                                    <i class="mdi mdi-file-document-box-plus" style="font-size: 16px !important; "> รายการ</i></h4>
+                                <p class="sub-header"></p>
+                            </div>
+                            <div class="col-6 text-right">
+                                
+                                
+                            </div>
+                        </div>
+                        <table id="datatable" class="table table-bordered table-striped  dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                            <thead>
+                                <tr class="bg-dark text-white">
+                                    <th width="5%">ลำดับ</th>
+                                    <th width="15%">รายการ</th>
+                                    <th width="10%">จำนวนเงิน</th>
+                                    <th width="10%">VAT 7%</th>
+                                    <th width="10%">รวมค่าใช้จ่าย</th>
+                                    <th width="10%">หัก ภาษร ณ ที่จ่าย 1%</th>
+                                    <th width="10%">คิดเป็นเงินที่จะจ่าย</th>
+                                    <th width="8%">หมายเหตุ</th>
+                                </tr>
+                            </thead>
+
+                            <?php $noitem = 0;?>
+                            @if (!empty($items))
+                            @foreach ($items as $item)
+                            <?php $noitem++;?>
+                            <tr>
+                                <td class="align-middle" style="width:5%">{{$noitem}}</td>
+                                <td class="align-middle" style="width:15%">{{$item['certificate_detail_name']}}</td>
+                                <td class="align-middle" style="width:10%">{{number_format($item['certificate_detail_money'],2,'.',',')}}</td>
+                                <td class="align-middle" style="width:10%">{{number_format(($item['certificate_detail_money'] * 7) / 100,2,'.',',')}}</td>
+                                <td class="align-middle" style="width:10%">{{number_format($item['certificate_detail_money'] + ($item['certificate_detail_money'] * 7) / 100,2,'.',',')}}</td>
+                                <td class="align-middle" style="width:10%">{{number_format($item['certificate_detail_tax'],2,'.',',')}}</td>
+                                <td class="align-middle" style="width:10%">{{number_format(($item['certificate_detail_money'] + ($item['certificate_detail_money'] * 7) / 100) - $item['certificate_detail_tax'],2,'.',',')}}</td>
+                                <td class="align-middle" style="width:8%">{{$item['certificate_detail_note']}}</td>
+                            </tr>
+                            @endforeach
+                            @endif
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <!-- end row -->
+        <div id="url-redirect-back" data-url="{{url('office/budget/certificate/all')}}"></div>
+
+        <div data-url="{{URL('/')}}" id="base-url-api"></div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+<script src="{{url('assets/default')}}/libs/bootstrap-filestyle2/bootstrap-filestyle.min.js"></script>
+
+<script src="{{ url('assets/js/datepicker-th/bootstrap-datepicker-th.min.js') }}"></script>
+<script src="{{url('assets/default')}}/libs/bootstrap-datepicker/bootstrap-datepicker.th.js"></script>
+
+<script src="{{url('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
+<script src="{{url('assets/js/plugins/validate/validate.js')}}"></script>
+
+<script>
+    $(".datepicker-autoclose").datepicker({
+        language: 'th',
+        autoclose: !0,
+        todayHighlight: !0
+    });
+
+
+    $(function () {
+
+        
+        $.validator.setDefaults({
+            submitHandler: function () {
+                $(".btn-submit").attr("disabled", "disabled");
+
+                ajaxSubmitForm("frm-save", "json", callBackFunc);
+                return false;
+            }
+        });
+
+        function callBackFunc(data) {
+            var alertType = 'error';
+            var alertTitle = 'แจ้งเตือน';
+            var alertMsg = data.msg;
+            var actionForm = $("input[name=action]").val();
+
+            var urlRedirect = $("#url-redirect-back").attr("data-url");
+
+            $(".btn-submit").attr("disabled", false);
+
+            if (data.status) {
+                setTimeout(() => {
+                    window.location.href = urlRedirect;
+                }, 2300);
+                
+                ajaxSweetAlert("success", data.msg, "แจ้งเตือน");
+            } else {
+                ajaxSweetAlert("error", data.msg, "แจ้งเตือน");
+            }
+        }
+
+        $('#frm-save').validate({
+            rules: {
+                'input[certificate_id]': {
+                    required: true
+                }
+            },
+            messages: {
+                'input[certificate_id]': {
+                    required: "กรุณากรอกข้อมูล"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+    
+
+</script>
+
+<script type="text/javascript">
+
+$(document).on("change", "#certificate_payfor", function(){
+    var _itemValue = $(this).val();
+
+    $('#loadDetail').load('{{URL('office/budget/certificate/get/loadDetail')}}' + '/' + _itemValue);
+});
+
+
+</script>
+@endsection
