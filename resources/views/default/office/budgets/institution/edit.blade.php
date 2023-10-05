@@ -111,10 +111,11 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">
-                                        <i class="mdi mdi-database-plus"> บันทึก</i>
-                                    </button>
-                                    <a href="{{URL('office/budgets/institution')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}"  class="btn btn-secondary"><i class=" mdi mdi-backspace-outline
-                                        "> ยกเลิก</i></a>
+                              <i class="mdi mdi-database-plus"> บันทึก</i>
+                            </button>
+                            <a href="{{URL('office/budgets/institution')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}" class="btn btn-secondary">
+                                <i class=" mdi mdi-backspace-outline"> ยกเลิก</i>
+                            </a>
                     </div>
                 </div>
                 <!-- end col -->
@@ -134,12 +135,9 @@
                                 @foreach ($detail as $item)
                                 <?php $no++;?>
 
-
                                 @endforeach
                                 @endif
 
-                                
-                            
                                 </div>
 
                             
@@ -155,8 +153,7 @@
                                 </thead>
 
 
-                                
-
+                            
                                     <?php $no = 0;?>
                                     @if (!empty($detail))
                                     @foreach ($detail as $item)

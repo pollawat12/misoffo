@@ -257,12 +257,15 @@
                         <li><a href="{{url('office/budgets/set/489')}}"><i class="fas fa-angle-right"></i> งบโครงการ</a></li>
                         <?php endif; ?>
 
+
+                        {{--
                         <?php
                             $RoleBudget3 = \App\Models\ModulePermission::where('module_functions_id', '10')->where('roles_id', $nav_role_id)->where('is_deleted', '0')->where('is_active','1')->get();
                             if(count($RoleBudget3) > 0):
                         ?>
                         <li><a href="{{url('office/budgets/set/490')}}"><i class="fas fa-angle-right"></i> งบชดเชย</a></li>
                         <?php endif; ?>
+                        --}}
 
                         <?php
                             $RoleBudget4 = \App\Models\ModulePermission::where('module_functions_id', '11')->where('roles_id', $nav_role_id)->where('is_deleted', '0')->where('is_active','1')->get();

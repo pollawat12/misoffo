@@ -5,6 +5,10 @@
 <link href="{{url('assets/default')}}/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
 <link href="{{url('assets/default')}}/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
 <link href="{{url('assets/default')}}/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+
+
+<link href="{{ url('assets/js/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+
 @endsection
 
 
@@ -29,7 +33,6 @@
             </div>
         </div>
         <!-- end page title -->
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card-box table-responsive">
@@ -43,10 +46,8 @@
                             <a href="{{url('office/budgets/institution/add')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}" class="btn btn-secondary"><i class="mdi mdi-file-document-box-plus-outline"> เพิ่มข้อมูล</i></a>
                         </div>
                     </div>
-
                     <table id="datatable" class="table table-bordered table-striped  dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
                         <thead>
                             <tr class="bg-dark text-white">
                                 <th width="10%">ลำดับ</th>
@@ -56,10 +57,7 @@
                                 <th style="width: 12%">จัดการ</th>
                             </tr>
                         </thead>
-
-
                         <tbody>
-
                             <?php $no = 0;?>
                             @if (!empty($infos))
                             @foreach ($infos as $info)
@@ -79,7 +77,7 @@
                                 <td>
                                     <select name="input_action" class="form-control " data-id="{{$info->id}}">
                                         <option value="">เลือก</option>
-                                        <option value="imports">อัปโหลดไฟล์เอกสาร</option>
+                                        {{--<option value="imports">อัปโหลดไฟล์เอกสาร</option>--}}
                                         <option value="edit" >แก้ไข</option>
                                         <option value="deleted" >ลบ</option>
                                     </select>
@@ -87,13 +85,11 @@
                             </tr> 
                             @endforeach
                             @endif
-                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div> <!-- end row -->
-
     </div>
 </div>
 @endsection
@@ -113,6 +109,8 @@
 <!-- Responsive examples -->
 <script src="{{url('assets/default')}}/libs/datatables/dataTables.responsive.min.js"></script>
 <script src="{{url('assets/default')}}/libs/datatables/responsive.bootstrap4.min.js"></script>
+
+<script src="{{url('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 
 <script>
     $(document).ready(function () {
@@ -163,9 +161,26 @@
             window.location='{{URL('office/budgets/institution')}}'+ '/' + values + '/' + id + '/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}';
         }else if(values == 'imports'){
             window.location='{{URL('office/budgets/institution/imports/lists/')}}'+ '/' + id + '/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}';
-        }else{
-            window.location='{{URL('office/budgets/institution')}}'+ '/' + values + '/' + id + '/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}';
-        }  
+        }else if(values == 'deleted'){
+            swal({
+                title: "แจ้งเตือน",
+                text: "คุณแน่ใจต้องการลบรายการนี้?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก",
+                closeOnConfirm: false
+            },
+            function(isConfirm){
+                if (isConfirm){
+                    //swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
+                    window.location='{{URL('office/budgets/institution')}}'+ '/' + values + '/' + id + '/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}';
+                } else {
+                    //swal("Cancelled", "Your imaginary file is safe :)", "error");
+                }
+            });
+        }else{}
     });
 </script>
 @endsection
