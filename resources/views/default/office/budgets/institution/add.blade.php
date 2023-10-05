@@ -73,10 +73,10 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6" >
                                 <div class="form-group">
                                     <label for="year_id">ประเภทงบ <code>*</code></label>
-                                    <select name="input[budgets_id_num]" id="budgets_id" class="form-control" style="height: 45px;" disabled>
+                                    <select name="input[budgets_id_num]" id="budgets_id_num" class="form-control" style="height: 45px;" disabled >
                                         <option value="">--เลือก--</option>
                                         @if (count($budget) > 0)
                                         @foreach($budget as $keybudget => $vabudget)
@@ -91,7 +91,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="budget_money">งบปนะมาณที่ได้รับ <code>*</code></label>
-                                    <input type="text" name="input[budget_money]" class="form-control" placeholder="" style="height: 45px;">
+                                    <input type="number" name="input[budget_money]" class="form-control" placeholder="" style="height: 45px;" step="any">
                                 </div>
                             </div>
                         </div>
@@ -175,12 +175,25 @@
             rules: {
                 'input[budget_money]': {
                     required: true
-                }
+                },
+                'input[institution_id]': {
+                    required: true
+                },
+                'input[budgets_id_num]': {
+                    required: true
+                },
+
             },
             messages: {
                 'input[budget_money]': {
                     required: "กรุณากรอกงบประมาณ"
-                }
+                },
+                'input[institution_id]': {
+                    required: "ระบุหน่วยงาน"
+                },
+                'input[budgets_id_num]': {
+                    required: "ระบุประเภทงบ"
+                },
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {

@@ -81,7 +81,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="year_id">ประเภทงบ <code>*</code></label>
-                                        <select name="input[budgets_id]" id="budgets_id" class="form-control" style="height: 45px;">
+                                        <select name="input[budgets_id_num]" id="budgets_id_num" class="form-control" style="height: 45px;" disabled>
                                             <option value="">--เลือก--</option>
                                             @if (count($budgetTitles) > 0)
                                             @foreach($budgetTitles as $keybudgetTitles => $vabudgetTitles)
