@@ -46,7 +46,7 @@
                             <input type="hidden" name="input[budgets_id]" value="{{$budgetsid}}">
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="year_id">ปีงบประมาณ <code>*</code></label>
                                         <select name="input[year_id]" id="year_id" class="form-control" style="height: 45px;">
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="year_id">หน่วยงาน <code>*</code></label>
                                         <select name="input[institution_id]" id="institution_id" class="form-control" style="height: 45px;">
@@ -75,10 +75,16 @@
                                         <small id="year_id" class="form-text text-muted"></small>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="budget_money">งบปนะมาณที่ได้รับ <code>*</code></label>
+                                        <input type="text" name="input[budget_money]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->budget_money}}">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="year_id">ประเภทงบ <code>*</code></label>
                                         <select name="input[budgets_id_num]" id="budgets_id_num" class="form-control" style="height: 45px;" disabled>
@@ -91,14 +97,14 @@
                                         </select>
                                         <small id="year_id" class="form-text text-muted"></small>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="budget_money">งบปนะมาณที่ได้รับ <code>*</code></label>
                                         <input type="text" name="input[budget_money]" class="form-control" placeholder="" style="height: 45px;" value="{{$info->budget_money}}">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -370,7 +376,7 @@
 
     $(document).ready(function () {
 
-
+      
         // $("#datatable").DataTable({
         //     "ordering": true,
         //     "pageLength": 25,

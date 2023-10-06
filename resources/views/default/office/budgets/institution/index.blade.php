@@ -173,11 +173,13 @@
                 closeOnConfirm: false
             },
             function(isConfirm){
+                console.log(isConfirm)
                 if (isConfirm){
                     //swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
                     window.location='{{URL('office/budgets/institution')}}'+ '/' + values + '/' + id + '/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}';
                 } else {
-                    //swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    // <a href="{{URL('office/budgets/institution')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}"
+                    window.location='{{URL('office/budgets/institution')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}';
                 }
             });
         }else{}

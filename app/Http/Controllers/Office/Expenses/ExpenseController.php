@@ -240,6 +240,16 @@ class ExpenseController extends Base
     }
 
 
+    public function budgetdestroy($id)
+    {
+        $process = BudgetsCosts::deleteRow($id);
+
+        return redirect()->back();
+    }
+
+
+    
+
     /**
      * Update the specified resource in storage.
      *
@@ -895,6 +905,7 @@ class ExpenseController extends Base
         $Yearname = YearBudget::find((int) $t);
 
         $Year = YearBudget::where('is_deleted', '0')->where('is_active','1')->get();
+        
 
         $arr = ['Year' , 'id' , 'info' , 'purchases' , 'institution' , 'Yearname' , 't' , 'pr' , 'company'];
 

@@ -26,7 +26,7 @@
                             <li class="breadcrumb-item active">งบประมาณ > ค่าใช้จ่าย</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">ค่าใช้จ่าย888</h4>
+                    <h4 class="page-title">ค่าใช้จ่าย</h4>
                 </div>
             </div>
         </div>
@@ -42,14 +42,20 @@
                             <div class="col-10">
                                 
                             </div>
-                            <div class="col-2 text-right">
+                            <!-- <div class="col-2 text-right">
                                 <select name="year_id_n" id="year_id_n" class="form-control" style="height: 40px; ">
-                                    <option value="">--เลือก--</option>
+                                    <option value="0">--เลือก1--</option>
                                     @if (count($year) > 0)
                                     @foreach($year as $valyear)
                                     <option value="{{$valyear['year_id']}}" @if($valyear['year_id'] == $id) selected @endif>{{$valyear['year_name']}}</option>
                                     @endforeach
                                     @endif
+                                </select>  
+                            </div> -->
+                            <!-- eddy -->
+                            <div class="col-2 text-right">
+                                <select name="year_id_n" id="year_id_n" class="form-control" style="height: 40px; ">
+                                    <option value="0">--เลือก--</option>
                                 </select>  
                             </div>
                         </div>
@@ -116,8 +122,11 @@
                                             <option value="">เลือก</option>
                                             {{-- <option value="view" >ดูรายละเอียด</option> 
                                             <option value="detail">ค่าใช้จ่ายย่อย</option>--}}
-                                            <option value="charges/edit" >แก้ไข</option>
-                                            <option value="charges/deleted" >ลบ</option>
+                                            <!-- <option value="charges/edit" >แก้ไข</option>
+                                            <option value="charges/deleted" >ลบ</option> -->
+                                            <!-- eddy -->
+                                            <option value="edit" >แก้ไข</option>
+                                            <option value="deleted" >ลบ</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -157,6 +166,8 @@
 <script src="{{url('assets/js/plugins/validate/validate.js')}}"></script>
 
 <script>
+
+      
     $(document).ready(function () {
         $("#datatable").DataTable({
             "ordering": true,
@@ -182,6 +193,37 @@
             window.location.href == __url;
         });
 
+      
+
+        //==**eddy===
+        const _year = <?php echo json_encode($year);?>;
+        const _sel = <?php echo json_encode($t);?>;
+        const _y_id = <?php echo json_encode($id);?>;
+        const _item = <?php echo json_encode($items);?>;
+        
+        console.log(_item)
+        //console.log(_y_id)
+        _year.sort(function(a, b) {
+             return b.year_name - a.year_name;
+        });
+
+        const d_year = $('#year_id_n');
+        let sel = "0";let i=0;
+        _year.forEach(async (value) => {
+            if(i == 0){sel = value.year_id} 
+            d_year.append($("<option></option>").val(value.year_id).html(value.year_name));
+            d_year.trigger("chosen:updated");
+            i++;
+        });
+
+        if(_y_id != _sel ){
+            //sel = '7';
+            d_year.val(sel).trigger('change');
+        }else{
+            d_year.val(_sel)  
+        }
+        //=======
+        
 
         // var a = $("#datatable-buttons").DataTable({
         //     lengthChange: !1,
@@ -201,11 +243,45 @@
         let id = $(this).attr('data-id');
         let values = $(this).val();
 
-        if(values == 'view'){
-            $('#con-close-modal-objective'+id).modal('show'); 
-        }else if(values != ''){
-            window.location='{{URL('office/expenses')}}'+ '/' + values + '/' + id + '/{{$id}}/?t={{$t}}&pr={{$pr}}';
-        } 
+        //alert(values)
+        // if(values == 'view'){
+        //     $('#con-close-modal-objective'+id).modal('show'); 
+        // }
+        // }else if(values != ''){
+        //     window.location='{{URL('office/expenses')}}'+ '/' + values + '/' + id + '/{{$id}}/?t={{$t}}&pr={{$pr}}';
+        // } 
+
+        console.log(id);
+
+
+        //==eddy==
+        if(values == 'edit'){
+            window.location='{{URL('office/expenses')}}'+ '/charges/edit/' + id + '/{{$id}}/?t={{$t}}&pr={{$pr}}';
+        
+        }else if(values == 'deleted'){
+            swal({
+                title: "แจ้งเตือน",
+                text: "คุณแน่ใจต้องการลบรายการนี้?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก",
+                closeOnConfirm: false
+            },
+            function(isConfirm){
+                if (isConfirm){
+                    // swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
+                     window.location='{{URL('office/expenses')}}'+ '/charges/deleted/' + id ;
+                } else {
+                    window.location='{{URL('office/expenses/charges')}}/{{$id}}/?t={{$t}}&pr={{$pr}}';
+                }
+            });
+        }else{}
+        //====
+
+
+
     });
 
 

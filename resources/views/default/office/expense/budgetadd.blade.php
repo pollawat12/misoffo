@@ -317,8 +317,12 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="mdi mdi-database-plus"> บันทึก</i>
                         </button>
-                        <a href="{{URL('office/expenses/all')}}?t=0&pr=0" class="btn btn-secondary"><i class=" mdi mdi-backspace-outline
-                            "> ยกเลิก</i></a>
+                            <!-- <a href="{{URL('office/expenses/all')}}?t=0&pr=0" class="btn btn-secondary"><i class=" mdi mdi-backspace-outline
+                            "> ยกเลิก</i></a> -->
+                             <!-- **eddy -->
+                            <a href="{{URL('office/expenses/charges')}}/{{$id}}?t=0&pr=0"  class="btn btn-secondary">
+                                <i class=" mdi mdi-backspace-outline"> ยกเลิก</i>
+                            </a> 
                     </form>
                 </div>
             </div>

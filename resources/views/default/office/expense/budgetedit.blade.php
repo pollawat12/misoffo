@@ -352,8 +352,12 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="mdi mdi-database-plus"> บันทึก</i>
                         </button>
-                        <a href="{{URL('office/expenses/all')}}?t=0&pr=0"  class="btn btn-secondary"><i class=" mdi mdi-backspace-outline
-                            "> ยกเลิก</i></a>
+                            <!-- {{--  <a href="{{URL('office/expenses/all')}}?t=0&pr=0"  class="btn btn-secondary"><i class=" mdi mdi-backspace-outline
+                           "> ยกเลิก</i></a>  --}}-->
+                            <!-- **eddy -->
+                            <a href="{{URL('office/expenses/charges')}}/{{$projectsId}}?t=0&pr=0"  class="btn btn-secondary"><i class=" mdi mdi-backspace-outline
+                            "> ยกเลิก</i></a> 
+                           
                     </form>
                 </div>
             </div>
@@ -389,6 +393,13 @@
 <script src="{{url('assets/js/plugins/validate/validate.js')}}"></script>
 
 <script>
+    //**eddy
+    // const _projectsId = <?php echo json_encode($projectsId);?>;
+    // console.log(_projectsId);
+
+
+
+
     $("#datatable").DataTable();
 
     $(".datepicker-autoclose").datepicker({
