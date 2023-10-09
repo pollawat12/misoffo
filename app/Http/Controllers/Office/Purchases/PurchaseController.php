@@ -72,8 +72,12 @@ class PurchaseController extends Base
 
         $purchasesgroup = DataSetting::where('group_type', "purchasesgroup")->where('is_deleted', '0')->where('is_active','1')->get();
 
-        $Year = YearBudget::where('is_deleted', '0')->where('is_active','1')->get();
+        //$Year = YearBudget::where('is_deleted', '0')->where('is_active','1')->get();
 
+        $Year = YearBudget::where('is_deleted', '0')
+        ->where('is_active', '1')
+        ->orderBy('in_year', 'desc')
+        ->get();
 
         $arr = ['purchasesstatus','purchasesmethod','purchasesmargin' , 'purchasesgroup' , 't' , 'pr' , 'employees' , 'Year'];
         
@@ -97,7 +101,8 @@ class PurchaseController extends Base
             $data = $request->input;
             $purchases_inspector = $request->purchases_inspector;
             $position_id = $request->position_id;
-
+            //$resp = ['status' => false, 'msg' =>  $data ];
+            //return response()->json($resp, 200);
             $result = Purchases::inserRow($data , true);
 
             $inspector = $purchases_inspector[1];
@@ -209,6 +214,7 @@ class PurchaseController extends Base
             // $purchases_inspector = $request->purchases_inspector;
             // $position_id = $request->position_id;
 
+    
             // $process = PurchasesOfficer::where('purchases_id', $id)->delete();
 
             if($data['purchases_status'] == 1){
@@ -216,6 +222,7 @@ class PurchaseController extends Base
                 $position_id = $request->position_id;
 
                 $result = Purchases::updateRow($data, $id);
+                //return response()->json($purchases_inspector, 200);
 
                 $inspector = $purchases_inspector[1];
 
@@ -228,6 +235,7 @@ class PurchaseController extends Base
                         $resultDetail = PurchasesOfficer::inserRow($inspector[$i] , $position[$i] , 1 , $result);
                     }
                 }
+               // return response()->json($numinspector, 200);
 
             }elseif($data['purchases_status'] == 2){
 

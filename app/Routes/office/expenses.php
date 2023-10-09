@@ -63,6 +63,10 @@ Route::prefix('expenses')->namespace('expenses')->group(function () {
 
     Route::get('project/get/info', [ExpenseController::class, 'getProject']);
 
+    Route::get('project/get/projectDDl', [ExpenseController::class, 'getProjectDDl']);
+    
+
+
     Route::get('project/getNew/info', [ExpenseController::class, 'getProjectNew']);
 
     // post

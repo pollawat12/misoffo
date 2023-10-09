@@ -1219,6 +1219,70 @@ class ExpenseController extends Base
         return response()->json(['elem_html' => $html], 200);
     }
 
+
+    public function getProjectDDl(Request $request) 
+    {
+        $yearID = $request->yearID;
+        $budgetId = $request->budgetId;
+        $type = $request->t;
+
+        $html = '';
+
+        //return response()->json(['elem_html' => $type], 200);
+        switch ($type) {
+            case 'yearNew':
+                    $html = '<option value="">--เลือก--</option>';
+                    $items = \App\Models\BudgetYear::where('year_id', $yearID)->where('budgets_id', $budgetId)->where('is_deleted', '0')->where('is_active','1')->get();
+                    $no = 0;
+                    if (!empty($items)) {
+                        foreach ($items as $item) {
+    
+                            $info = \App\Models\DataSetting::find((int) $item['institution_id']);
+    
+                            if($no == 0){ $sta = 'selected'; }
+                            $html .= '<option value="'.$item['institution_id'].'">'.$info->name.'</option>';
+                        $no++;}
+                    }
+                    break;
+
+            case 'statementtypeNew':
+                $institutionId = $request->institutionId;
+
+                    $html = '<option value="0">--เลือก--</option>';
+                    $items = \App\Models\BudgetsrDetail::getSelectDDlWithYear('statementtypeNew' , $yearID , $budgetId  , $institutionId);
+    
+                    if (!empty($items)) {
+                        foreach ($items as $item) {
+                            if(strlen($item['sortorder']) == 1){
+                                $html .= '<option value="'.$item['id'].'">'.$item['name'].'</option>';
+                            }
+                        }
+                    }
+                    break;
+
+                    
+
+            case 'budgetNew':
+                $itemValue = $request->itemValue;
+                $infos = \App\Models\BudgetsrDetail::where('id', $itemValue)->where('is_deleted', '0')->where('is_active','1')->get();
+                foreach ($infos as $info);
+
+                $html = '<option value="0">--เลือก--</option>';
+                $items = \App\Models\BudgetsrDetail::getSelectNew('budgetNew' , $itemValue , $info['sort_order'], $info['institution_id'], $info['budget_year_id']);
+
+                if (!empty($items)) {
+                    foreach ($items as $item) {
+                        $html .= '<option value="'.$item['id'].'">'.$item['name'].'</option>';
+                    }
+                }
+                break;
+
+            
+        }
+
+        return response()->json(['elem_html' => $html], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

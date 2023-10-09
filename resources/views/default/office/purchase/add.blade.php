@@ -61,7 +61,7 @@
                                                     class="text-danger">*</span></label>
                                             <div>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control datepicker-autoclose"  placeholder="วว/ดด/ปปปป" style="height: 45px;" name="input[purchases_invoice_date]">
+                                                    <input type="text" autocomplete="off" class="form-control datepicker-autoclose"  placeholder="วว/ดด/ปปปป" style="height: 45px;" name="input[purchases_invoice_date]">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                                                     </div>
@@ -74,7 +74,7 @@
                                             <label for="inputEmail4"
                                                 class="col-form-label label-step">งบประมาณที่ได้รับ <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="input[purchases_allocated_budget]" id="inputEmail4" placeholder="" style="height: 45px;">
+                                            <input type="number" class="form-control" name="input[purchases_allocated_budget]" id="inputEmail4" placeholder="" style="height: 45px;">
                                         </div>
                                     </div>
                                     <!-- <div class="col-lg-4">
@@ -152,9 +152,9 @@
                                             <label class="custom-control-label" for="Check1">ไม่มี</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="radio" name="input[purchases_board]" class="custom-control-input" id="Check2" value="1">
-                                            <label class="custom-control-label" for="Check2">มี ระบุ จำนวน .....
-                                                คน</label>
+                                            <input type="radio" name="input[purchases_board]" class="custom-control-input" id="Check2" value="1" checked>
+                                            <label class="custom-control-label" for="Check2">มี ระบุ 
+                                                </label>
                                         </div>
 
                                         
@@ -167,7 +167,7 @@
                                         
 
                                         <div class="table-responsive">
-                                            <table class="table table-bordered mb-0 input_fields_wrap">
+                                            <table class="table table-bordered mb-0 input_fields_wrap" id="purchases_person_list">
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <!-- <th class="text-center text-white" style="width: 5%;">ลำดับ</th> -->
@@ -286,47 +286,59 @@
                 'input[purchases_name]': {
                     required: true
                 },
-                // 'input[durable_serial]': {
-                //     required: true
-                // },
-                // 'input[category_id]': {
-                //     required: true
-                // },
-                // 'input[typedata_id]': {
-                //     required: true
-                // },
-                // 'input[unitcount_id]': {
-                //     required: true
-                // },
-                // 'input[durable_received_date]': {
-                //     required: true
-                // },
-                // 'input[durable_purchase]': {
-                //     required: true
-                // }
+                'input[purchases_order_number]': {
+                    required: true
+                },
+                'input[purchases_invoice_date]': {
+                    required: true
+                },
+                'input[purchases_allocated_budget]': {
+                    required: true
+                },
+                'input[year_id]': {
+                    required: true
+                },
+                'input[institution_id]': {
+                    required: true
+                },
+                'input[budget_categroy]': {
+                    required: true
+                },
+                'input[budget_type]': {
+                    required: true
+                },
+                'input[purchases_refer]': {
+                    required: true
+                }
             },
             messages: {
                 'input[purchases_name]': {
-                    required: "กรุณากรอกเรื่อง"
+                    required: "กรุณากรอก ชื่อเรื่อง"
                 },
-                // 'input[durable_serial]': {
-                //     required: "กรุณากรอก Serial Number"
-                // },
-                // 'input[category_id]': {
-                //     required: "กรุณาเลือก หมวดหมู่"
-                // },
-                // 'input[typedata_id]': {
-                //     required: "กรุณาเลือก ประเภท"
-                // },
-                // 'input[unitcount_id]': {
-                //     required: "กรุณาเลือก หน่วยนับ"
-                // },
-                // 'input[durable_received_date]': {
-                //     required: "กรุณากรอก วันที่ได้รับ"
-                // },
-                // 'input[durable_purchase]': {
-                //     required: "กรุณากรอก ใบจัดซื้อ-จัดจ้าง"
-                // }
+                'input[purchases_order_number]': {
+                    required: "กรุณากรอก บันทึกเลขที่"
+                },
+                'input[purchases_invoice_date]': {
+                    required: "กรุณากรอก วันที่"
+                },
+                'input[purchases_allocated_budget]': {
+                    required: "กรุณากรอก งบประมาณที่ได้รับ"
+                },
+                'input[year_id]]': {
+                    required: "กรุณากรอก ปีงบประมาณ"
+                },
+                'input[institution_id]': {
+                    required: "กรุณากรอก หน่วยงาน"
+                },
+                'input[budget_categroy]': {
+                    required: "กรุณากรอก ประเภทงบ"
+                },
+                'input[budget_type]': {
+                    required: "กรุณากรอก ประเภทค่าใช้จ่าย"
+                },
+                'input[purchases_refer]': {
+                    required: "กรุณากรอก รายการค่าใช่จ่าย "
+                }
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -341,6 +353,29 @@
             },
             submitHandler: function () {
                 $(".btn-submit").attr("disabled", "disabled");
+                console.log("save");
+
+
+                // Get the table element by its id
+                // var table = document.getElementById("purchases_person_list");
+                // // Get the number of rows in the table's tbody
+                // //var rowCount = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
+                // var cellCount = table.getElementsByTagName("tr").length;
+                // var rows = table.querySelectorAll("tr");
+                // // Loop through each row
+                // rows.forEach(function(row) {
+                //     // Do something with the row or its cells
+                //     console.log("Row content: " + row.textContent);
+
+                //     // If you want to access the cells within the row:
+                //     // var cells = row.querySelectorAll("td");
+                //     // cells.forEach(function(cell) {
+                //     // console.log("Cell content: " + cell.textContent);
+                //     // });
+                // });
+
+                // Display the row count
+                //alert("Number of rows: " + cellCount);
 
                 ajaxSubmitFormImage("frm-save", "json", callBackFunc);
                 return false;
@@ -355,7 +390,7 @@
 $(document).on('change', '#year_id', function(params) {
     let values = $(this).val();
 
-    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=yearNew&id=" + values + '&parentId=489';
+    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=yearNew&yearID=" + values + '&budgetId=489';
 
     $("#institution_id").html('<option value="">--เลือก--</option>');
     $.get(_url, function(data){
@@ -368,7 +403,9 @@ $(document).on('change', '#year_id', function(params) {
 $(document).on("change", "#institution_id", function(){
     var _itemValue = $(this).val();
     var _id = $("#year_id").val();
-    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=statementtypeNew&id=" + _itemValue + '&parentId=' + _id;
+    console.log("institution_id:"+_itemValue );
+    console.log("year_id:"+_id );
+    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=statementtypeNew&institutionId=" + _itemValue + '&yearID=' + _id + '&budgetId=489';
 
     $("#budget_type").html('<option value="">--เลือก--</option>');
 
@@ -381,7 +418,7 @@ $(document).on("change", "#institution_id", function(){
 $(document).on("change", "#budget_categroy", function(){
     var _itemValue = $(this).val();
     var _id = $("#year_id").val();
-    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=budgetNew&id=" + _itemValue + '&parentId=' + _id;
+    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=budgetNew&itemValue=" + _itemValue + '&parentId=' + _id;
 
     $("#budget_type").html('<option value="">--เลือก--</option>');
     $("#projects_id").html('<option value="">--เลือก--</option><option value="0">สำนักงาน</option>');

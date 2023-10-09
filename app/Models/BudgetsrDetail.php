@@ -335,4 +335,84 @@ class BudgetsrDetail extends Model
 
         return $array;
     }
+
+
+
+
+
+    public static function getSelectDDlWithYear($type='', $yearID=0 , $budgetId =0 ,$institutionId =0 , $isCount=false )
+    {   
+
+        if($type == 'statementtypeNew'){
+
+            $conditions = [
+                'institution_id' => (int) $institutionId ,
+                'budget_year_id' => (int) $yearID ,          
+                'budget_id' => (int) $budgetId          
+            ];
+
+            $group = 'statementtype_id';
+
+            $query = self::where('parent_id', 0)->where($conditions);
+            
+
+        }elseif($type == 'budget'){
+
+            // $conditions = [
+            //     'budget_year_id' => (int) $parentId ,
+            //     'parent_id' => (int) $id
+            // ];
+
+            // $group = 'budget_id';
+
+            // $query = self::where('parent_id', '!=' , 0)->where($conditions);
+
+        }elseif($type == 'budgetNew'){
+
+            // $conditions = [
+            //     'parent_id' => (int) $id
+            // ];
+
+            // $group = 'budget_id';
+
+            // $query = self::where('parent_id', '!=' , 0)->where($conditions);
+        }
+        
+
+        // $query = self::where($conditions)->groupBy('budget_year_id');
+
+        $records = $query->get();
+        $array = [];
+
+        if (!empty($records)) {
+            foreach ($records as $row) {
+
+                if($type == 'statementtypeNew'){ 
+
+                    // $data = DataSetting::getNameDataByValueAndType($row->statementtype_id,'statementtype');
+
+                    $array[] = [
+                        'id' => $row->id,
+                        'name' => $row->name,
+                        'sortorder' => $row->sort_order
+                    ];
+
+                }elseif($type == 'budgetNew'){ 
+
+                    $data = DataSetting::getNameDataByValueAndType($row->budget_id,'budget');
+
+                    $array[] = [
+                        'id' => $row->id,
+                        'name' => $data
+                    ];
+                }
+                
+                
+            }
+        }
+
+
+        return $array;
+    }
+
 }
