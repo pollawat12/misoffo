@@ -42,22 +42,22 @@
                             <div class="col-10">
                                 
                             </div>
-                            <!-- <div class="col-2 text-right">
+                            <div class="col-2 text-right">
                                 <select name="year_id_n" id="year_id_n" class="form-control" style="height: 40px; ">
-                                    <option value="0">--เลือก1--</option>
+                                    <option value="0">--เลือก--</option>
                                     @if (count($year) > 0)
                                     @foreach($year as $valyear)
                                     <option value="{{$valyear['year_id']}}" @if($valyear['year_id'] == $id) selected @endif>{{$valyear['year_name']}}</option>
                                     @endforeach
                                     @endif
                                 </select>  
-                            </div> -->
+                            </div>
                             <!-- eddy -->
-                            <div class="col-2 text-right">
+                            <!-- <div class="col-2 text-right">
                                 <select name="year_id_n" id="year_id_n" class="form-control" style="height: 40px; ">
                                     <option value="0">--เลือก--</option>
                                 </select>  
-                            </div>
+                            </div> -->
                         </div>
 
 
@@ -195,34 +195,34 @@
 
       
 
-        //==**eddy===
-        const _year = <?php echo json_encode($year);?>;
-        const _sel = <?php echo json_encode($t);?>;
-        const _y_id = <?php echo json_encode($id);?>;
-        const _item = <?php echo json_encode($items);?>;
+        // //==**eddy===
+        // const _year = <?php echo json_encode($year);?>;
+        // const _sel = <?php echo json_encode($t);?>;
+     const _y_id = <?php echo json_encode($id);?>;
+        // const _item = <?php echo json_encode($items);?>;
         
-        console.log(_item)
-        //console.log(_y_id)
-        _year.sort(function(a, b) {
-             return b.year_name - a.year_name;
-        });
+        console.log(_y_id)
+        // //console.log(_y_id)
+        // _year.sort(function(a, b) {
+        //      return b.year_name - a.year_name;
+        // });
 
-        const d_year = $('#year_id_n');
-        let sel = "0";let i=0;
-        _year.forEach(async (value) => {
-            if(i == 0){sel = value.year_id} 
-            d_year.append($("<option></option>").val(value.year_id).html(value.year_name));
-            d_year.trigger("chosen:updated");
-            i++;
-        });
+        // const d_year = $('#year_id_n');
+        // let sel = "0";let i=0;
+        // _year.forEach(async (value) => {
+        //     if(i == 0){sel = value.year_id} 
+        //     d_year.append($("<option></option>").val(value.year_id).html(value.year_name));
+        //     d_year.trigger("chosen:updated");
+        //     i++;
+        // });
 
-        if(_y_id != _sel ){
-            //sel = '7';
-            d_year.val(sel).trigger('change');
-        }else{
-            d_year.val(_sel)  
-        }
-        //=======
+        // if(_y_id != _sel ){
+        //     //sel = '7';
+        //     d_year.val(sel).trigger('change');
+        // }else{
+        //     d_year.val(_sel)  
+        // }
+        // //=======
         
 
         // var a = $("#datatable-buttons").DataTable({

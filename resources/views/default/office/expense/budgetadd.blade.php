@@ -40,9 +40,7 @@
                                 <p class="sub-header"></p>
                             </div>
                         </div>
-
                         <table id="datatable" class="table table-bordered table-striped  dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
                             <thead>
                                 <tr class="bg-dark text-white">
                                     <th width="5%">ลำดับ</th>
@@ -53,8 +51,6 @@
                                     <th style="width: 8%">จัดการ</th>
                                 </tr>
                             </thead>
-
-
                             <tbody>
                                 @foreach ($purchases as $purchase)
                                 <?php $noN++; ?>
@@ -88,13 +84,12 @@
 
                     <form action="{{url('office/expenses/save')}}" method="POST" name="frm-save" id="frm-save" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="add">
+
                         <input type="hidden" name="edit_id" value="0">
-
                         <input type="hidden" name="input[type_id]" value="{{$t}}">
-
                         <input type="hidden" name="input[institution]" value="0">
 
-                        <input type="hidden" name="input[year_id]" id="year_id" value="{{$id}}">
+                        <!--{{--  <input type="hidden" name="input[year_id]" id="year_id" value="{{$id}}"> --}}-->
 
                         <input type="hidden" name="input[purchases_id]" id="purchases_id" value="0">
 
@@ -115,7 +110,8 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="dob">ลงวันที่ </label>
+                                    <!-- <label for="dob">ลงวันที่ </label> -->
+                                    <label  >ลงวันที่ <code>*</code></label>
                                     <div>
                                         <div class="input-group">
                                             <input type="text" class="form-control datepicker-autoclose" style="height: 45px;" placeholder="วว/ดด/ปปปป" name="input[date_report]">
@@ -128,10 +124,10 @@
                             </div>
 
 
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="year_id_n">ปีงบประมาณ <code>*</code></label>
-                                    <select name="input[year_id_n]" id="year_id_n" class="form-control" style="height: 45px;" disabled>
+                                    <select name="input[year_id_n]" id="year_id_n" class="form-control" style="height: 45px;" >
                                         <option value="">--เลือก--</option>
                                         @if (count($Year) > 0)
                                         @foreach($Year as $keyyear => $valyear)
@@ -140,6 +136,21 @@
                                         @endif
                                     </select>
                                     <small id="year_id_n" class="form-text text-muted"></small>
+                                </div>
+                            </div> -->
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="year_id">ปีงบประมาณ <code>*</code></label>
+                                    <select name="input[year_id]" id="year_id" class="form-control" style="height: 45px;" >
+                                        <option value="">--เลือก--</option>
+                                        @if (count($Year) > 0)
+                                        @foreach($Year as $keyyear => $valyear)
+                                        <option value="{{$valyear->id}}" @if($valyear->id == $t) selected @endif>{{$valyear->in_year}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <small id="year_id" class="form-text text-muted"></small>
                                 </div>
                             </div>
 
@@ -164,13 +175,33 @@
                                     <small id="year_budget" class="form-text text-muted"></small>
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="page_number">ID Invoice <code>*</code></label>
+                                    <input type="text" name="input[page_number]" class="form-control" placeholder="" style="height: 45px;">
+                                    <small id="page_number" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="expense_item">เลขที่ใบแจ้งหนี้ </label>
+                                    <input type="text" name="input[expense_item]" class="form-control" placeholder="" style="height: 45px;">
+                                    <small id="expense_item" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <!-- {{-- <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="year_id">หน่วยงาน <code>*</code></label>
+                                    <label for="institution_id">หน่วยงาน <code>*</code></label>
                                     <select name="input[institution_id]" id="institution_id" class="form-control" style="height: 45px;">
                                         <option value="">--เลือก--</option>
                                         @if (count($institution) > 0)
@@ -180,7 +211,17 @@
                                         @endforeach
                                         @endif
                                     </select>
-                                    <small id="year_id" class="form-text text-muted"></small>
+                                    <small id="institution_id" class="form-text text-muted"></small>
+                                </div>
+                            </div>  --}} -->
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="institution_id" >หน่วยงาน <code>*</code></label>
+                                    <select name="input[institution_id]" id="institution_id" class="form-control" style="height: 45px;">
+                                        <option value="">--เลือก--</option>
+                                    </select>
+                                    <small id="institution_id" class="form-text text-muted"></small>
                                 </div>
                             </div>
 
@@ -203,29 +244,14 @@
                             </div>
 
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="page_number">ID Invoice <code>*</code></label>
-                                    <input type="text" name="input[page_number]" class="form-control" placeholder="" style="height: 45px;">
-                                    <small id="page_number" class="form-text text-muted"></small>
-                                </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="expense_item">เลขที่ใบแจ้งหนี้ </label>
-                                    <input type="text" name="input[expense_item]" class="form-control" placeholder="" style="height: 45px;">
-                                    <small id="expense_item" class="form-text text-muted"></small>
-                                </div>
-                            </div>
-
-                        </div>
+                        
 
                         
                         <span id="loadproject">
 
                             <input type="hidden" name="input[projects_id]" id="projects_id" value="0">
+                            <!-- <input type="text" name="input[projects_id]" id="projects_id" value="0"> -->
                         </span>
 
                         <div class="row">
@@ -240,20 +266,20 @@
                                         @endforeach
                                         @endif
                                     </select>
-                                    <small id="year_id" class="form-text text-muted"></small>
+                                    <small id="pay_for" class="form-text text-muted"></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="expenses_amount">จำนวนเงิน (ก่อน Vat 7%) </label>
-                                    <input type="text" name="input[expenses_amount]" class="form-control" id="expenses_amount" placeholder="" style="height: 45px;" value="0.00">
+                                    <input type="number" name="input[expenses_amount]" class="form-control" id="expenses_amount" placeholder="" style="height: 45px;" value="0.00" step="any">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="interest_amount">บวก Vat 7%</label>
-                                    <input type="text" name="input[interest_amount]" id="interest_amount" class="form-control" placeholder="" style="height: 45px;" value="0.00">
+                                    <input type="number" name="input[interest_amount]" id="interest_amount" class="form-control" placeholder="" style="height: 45px;" value="0.00" step="any">
                                 </div>
                             </div>
 
@@ -264,21 +290,21 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="money_in_amount">ค่าใช้จ่าย (รวม) </label>
-                                    <input type="text" name="input[money_in_amount]" id="money_in_amount" class="form-control" placeholder="" style="height: 45px;" value="0.00">
+                                    <input type="number" name="input[money_in_amount]" id="money_in_amount" class="form-control" placeholder="" style="height: 45px;" value="0.00" step="any">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="deduct_amount">หัก 1% ณ ที่จ่าย (บาท) </label>
-                                    <input type="text" name="input[deduct_amount]" id="deduct_amount"  class="form-control" placeholder="" style="height: 45px;" value="0.00">
+                                    <input type="number" name="input[deduct_amount]" id="deduct_amount"  class="form-control" placeholder="" style="height: 45px;" value="0.00" step="any">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="sum_amount">จำนวนเงินจ่ายเช็ค </label>
-                                    <input type="text" name="input[sum_amount]" id="sum_amount" class="form-control" placeholder="" style="height: 45px;" value="0.00">
+                                    <input type="number" name="input[sum_amount]" id="sum_amount" class="form-control" placeholder="" style="height: 45px;" value="0.00" step="any">
                                 </div>
                             </div>
                         </div>
@@ -287,7 +313,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="cost_detail">รายละเอียด</label>
-                                    <textarea name="input[cost_detail]" class="form-control"></textarea>
+                                    <textarea name="input[cost_detail]" id="cost_detail" class="form-control"></textarea>
                                     <small id="durable_detail" class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -333,6 +359,7 @@
         <div id="url-redirect-back" data-url="{{url('office/expenses')}}/all?t=0&pr=0"></div>
 
         <div data-url="{{URL('/')}}" id="base-url-api"></div>
+        
     </div>
 </div>
 @endsection
@@ -352,47 +379,98 @@
         todayHighlight: !0
     });
 
+    $(document).ready(function () {
+
+        $("#year_id").trigger('change');
+    });
+
     $(document).on("change", "#year_id", function() {
-        var _itemValue = $(this).val();
-        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/getNew/info/?t=statementtype&id=" + _itemValue + '&parentId=0';
+
+        //var _itemValue = $(this).val();
+        //var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/getNew/info/?t=statementtype&id=" + _itemValue + '&parentId=0';
 
         $("#budget_type").html('<option value="">--เลือก--</option>');
+        $("#budget_categroy").html('<option value="">--เลือก--</option>');
 
-        $("#budget_categroy").html  ;
-        $.get(_url, function(data) {
-            $("#budget_categroy").html(data.elem_html);
+
+     
+
+        // $("#budget_categroy").html  ;
+        // $.get(_url, function(data) {
+        //     $("#budget_categroy").html(data.elem_html);
+        // }, "json");
+
+
+        let values = $(this).val();
+         
+       // let year_s = $( "#myselect option:selected" ).text();
+        let year_s = $(this).find("option:selected").text();
+        
+        let html = '<option value="">--เลือก--</option>'
+        +'<option value="10">ตุลาคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="11">พฤศจิกายน '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="12">ธันวาคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="1">มกราคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="2">กุมภาพันธ์ '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="3">มีนาคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="4">เมษายน '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="5">พฤษภาคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="6">มิถุนายน  '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="7">กรกฎาคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="8">สิงหาคม '+ (parseInt(year_s)-1) + '</option>'
+        +'<option value="9">กันยายน '+ (parseInt(year_s)-1) + '</option>'
+        $("#year_budget").html(html);
+
+
+
+
+
+        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=yearNew&yearID=" + values + '&budgetId=488';
+
+        $("#institution_id").html('<option value="">--เลือก--</option>');
+        $.get(_url, function(data){
+            $("#institution_id").html(data.elem_html);
         }, "json");
+     
+
+     
     });
 
     $(document).on("change", "#institution_id", function() {
         var _itemValue = $(this).val();
-        var _id = $("#year_id_n").val();
-        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=statementtypeNew&id=" + _itemValue + '&parentId=' + _id;
+        var _id = $("#year_id").val();
+        
+        //var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=statementtypeNew&id=" + _itemValue + '&parentId=' + _id;
 
-        $("#budget_type").html('<option value="">--เลือก--</option>');
+        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=statementtypeNew&institutionId=" + _itemValue + '&yearID=' + _id + '&budgetId=488';
 
         $("#budget_categroy").html('<option value="">--เลือก--</option>');
+        $("#budget_type").html('<option value="">--เลือก--</option>');
+        
         $.get(_url, function(data) {
             $("#budget_categroy").html(data.elem_html);
         }, "json");
     });
 
-    $(document).on("change", "#year_id", function() {
-        var _itemValue = $(this).val();
-        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=statementtype&id=" + _itemValue + '&parentId=0';
 
-        $("#budget_type").html('<option value="">--เลือก--</option>');
+    // $(document).on("change", "#year_id", function() {
+    //     var _itemValue = $(this).val();
+    //     var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=statementtype&id=" + _itemValue + '&parentId=0';
 
-        $("#budget_categroy").html('<option value="">--เลือก--</option>');
-        $.get(_url, function(data) {
-            $("#budget_categroy").html(data.elem_html);
-        }, "json");
-    });
+    //     $("#budget_type").html('<option value="">--เลือก--</option>');
+
+    //     $("#budget_categroy").html('<option value="">--เลือก--</option>');
+    //     $.get(_url, function(data) {
+    //         $("#budget_categroy").html(data.elem_html);
+    //     }, "json");
+    // });
 
     $(document).on("change", "#budget_categroy", function() {
         var _itemValue = $(this).val();
         var _id = $("#year_id").val();
-        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=budgetNew&id=" + _itemValue + '&parentId=' + _id;
+
+        //var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=budgetNew&id=" + _itemValue + '&parentId=' + _id;
+        var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=budgetNew&itemValue=" + _itemValue + '&parentId=' + _id;
 
         $("#budget_type").html('<option value="">--เลือก--</option>');
         $("#projects_id").html('<option value="">--เลือก--</option><option value="0">สำนักงาน</option>');
@@ -412,7 +490,10 @@
         var _itemValue = $(this).val();
         var _id = $("#year_id").val();
 
+        alert(_itemValue);
+
         $('#loadtype').load('{{URL('office/expenses/loadtype')}}' + '/' + _itemValue + '/' + _id);
+      
     });
 
     $(document).on("change", "#projects_id_1", function() {
@@ -446,12 +527,21 @@
 
             if (data.status) {
                 setTimeout(() => {
-                    window.location.href = urlRedirect;
+                    //window.location.href = urlRedirect;
+                   // var _id = $("#year_id").val();
+                   // window.location.href  = "{{url('office/expenses/charges')}}/" +  _id  +"?t=0&pr=0"
+
                 }, 2300);
 
-                ajaxSweetAlert("success", data.msg, "แจ้งเตือน");
+                //ajaxSweetAlert("success", data.msg, "แจ้งเตือน");
+                ajaxSweetAlert("success", data.id, "แจ้งเตือน");
+
+                cost_detail.value =data.id
             } else {
-                ajaxSweetAlert("error", data.msg, "แจ้งเตือน");
+                ajaxSweetAlert("error", data.id, "แจ้งเตือน");
+               // ajaxSweetAlert("success", data.msg, "แจ้งเตือน");
+
+               cost_detail.value =data.id
             }
         }
 
@@ -464,11 +554,28 @@
                     required: true
                 },
                 'input[budget_categroy]': {
+                    required: true,  min: 1
+                },
+                // 'input[cost_type]': {
+                //     required: true,  min: 1
+                // },
+                'input[year_id]': {
                     required: true
                 },
-                'input[cost_type]': {
+                'input[institution_id]': {
+                    required: true
+                },
+                'input[budget_type]': {
+                    required: true,  min: 1
+                },
+                'input[year_budget]': {
+                    required: true
+                },
+                'input[pay_for]': {
                     required: true
                 }
+                
+                
             },
             messages: {
                 'input[date_report]': {
@@ -478,10 +585,25 @@
                     required: "กรุณาเลือกเลขเอกสาร"
                 },
                 'input[budget_categroy]': {
-                    required: "กรุณาเลือกประเภทงบ"
+                    required: "กรุณาเลือกประเภทงบ", min: "กรุณาเลือกประเภทงบ"
                 },
-                'input[cost_type]': {
-                    required: "กรุณาเลือกประเภทรายจ่าย"
+                // 'input[cost_type]': {
+                //     required: "กรุณาเลือกประเภทรายจ่าย", min: "กรุณาเลือกประเภทรายจ่าย"
+                // },
+                'input[year_id]': {
+                    required: "กรุณาเลือกปีงบประมาณ"
+                },
+                'input[institution_id]': {
+                    required: "กรุณาเลือกหน่วยงาน"
+                },
+                'input[budget_type]': {
+                    required: "กรุณาเลือกประเภทค่าใช้จ่าย", min: "กรุณาเลือกประเภทงบ"
+                },
+                'input[year_budget]': {
+                    required: "กรุณาเลือกค่าใช้จ่าย (ประจำเดือนปี)"
+                },
+                'input[pay_for]': {
+                    required: "กรุณาเลือก จ่ายให้ (หน่วยงาน/บริษัท)"
                 }
             },
             errorElement: 'span',

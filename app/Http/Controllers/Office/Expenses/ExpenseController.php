@@ -114,10 +114,11 @@ class ExpenseController extends Base
         $resp = ['status' => false, 'msg' => 'error!'];
 
         if ($request->ajax() && $request->isMethod('post')) {
-            $data = $request->input;
+             $data = $request->input;
 
             $result = BudgetsCosts::inserRow($data , true);
-
+           
+           
 
             if ($request->hasFile('budget_file')) {
                         
@@ -135,9 +136,9 @@ class ExpenseController extends Base
             }
 
             if ($result) {
-                $resp = ['status' => true, 'msg' => 'บันทึกข้อมูลสำเร็จ' , 'id' => $result];
+                 $resp = ['status' => true, 'msg' => 'บันทึกข้อมูลสำเร็จ' , 'id' => $result];
             }
-        }
+         }
 
         return response()->json($resp, 200);
     }
@@ -838,10 +839,14 @@ class ExpenseController extends Base
     {
         $year = BudgetYear::getdataGroupYear();
 
+        $keys = array_column($year, 'year_name');
+        array_multisort($keys, SORT_DESC, $year);
+
         $infos = BudgetYear::where('is_deleted', '0')->where('is_active','1')->orderBy('year_id', 'ASC')->limit(1)->get();
         foreach ($infos as $info);
 
-        $id = $info['id'];
+        //$id = $info['id'];
+        $id = $year[0]['year_id'];
 
         $purchases = PurchasesStatus::getData((int) $id , (int) $info['year_id']);
 
@@ -867,6 +872,11 @@ class ExpenseController extends Base
         $pr = $request->input('pr');
         
         $year = BudgetYear::getdataGroupYear();
+
+        //budgetshow
+        //$year = $year->sortBy('year_name');
+        $keys = array_column($year, 'year_name');
+        array_multisort($keys, SORT_DESC, $year);
 
         $infos = BudgetYear::where('is_deleted', '0')->where('is_active','1')->orderBy('year_id', 'ASC')->limit(1)->get();
 
@@ -904,7 +914,12 @@ class ExpenseController extends Base
 
         $Yearname = YearBudget::find((int) $t);
 
-        $Year = YearBudget::where('is_deleted', '0')->where('is_active','1')->get();
+        //$Year = YearBudget::where('is_deleted', '0')->where('is_active','1')->get();
+
+        $Year = YearBudget::where('is_deleted', '0')
+        ->where('is_active', '1')
+        ->orderBy('in_year', 'desc')
+        ->get();
         
 
         $arr = ['Year' , 'id' , 'info' , 'purchases' , 'institution' , 'Yearname' , 't' , 'pr' , 'company'];

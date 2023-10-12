@@ -10,6 +10,28 @@
 <link rel="stylesheet" href="{{url('assets/js/plugins/sweetalert/sweetalert.css')}}">
 
 <link rel="stylesheet" href="{{url('assets/default/css/jquery.stickytable.min.css')}}">
+
+<style>
+    .bg-p{
+        background-color:#7DCEA0 ;
+    }
+    .bg-a{
+        background-color:#F7DC6F ;
+    }
+    .bg-df{
+        background-color:#85C1E9 ;
+        
+    }
+
+    /* #datatable td{
+        border:none!important;
+    }  */
+
+    #datatable tbody{
+        border:none!important;
+    }
+</style>
+
 @endsection
 
 @section('content')
@@ -125,32 +147,42 @@
 
                                         <thead>
                                             <tr class="bg-dark text-white">
-                                                <th style="width: 3%" rowspan="2">ลำดับ</th>
+                                                <!-- <th style="width: 3%" rowspan="2">ลำดับ</th>
                                                 <th style="width: 15%" rowspan="2">รายงาน</th>
-                                                <th style="width: 20%" colspan="4">ไตรมาส 1 ปีงบประมาณ {{$valyear->in_year}}</th>
-                                                <th style="width: 20%" colspan="4">ไตรมาส 2 ปีงบประมาณ {{$valyear->in_year}}</th>
+                                                <th style="width: 20%" colspan="12">ไตรมาส 1 ปีงบประมาณ {{$valyear->in_year}}</th>
+                                                <th style="width: 20%" colspan="12">ไตรมาส 2 ปีงบประมาณ {{$valyear->in_year}}</th>
                                                 <th style="width: 20%" colspan="4">ไตรมาส 3 ปีงบประมาณ {{$valyear->in_year}}</th>
                                                 <th style="width: 20%" colspan="4">ไตรมาส 4 ปีงบประมาณ {{$valyear->in_year}}</th>
-                                                <th style="width: 15%" rowspan="2">รวมรายจ่าย ปีงบประมาณ {{$valyear->in_year}}</th>
-                                                <!-- <th style="width: 15%" rowspan="2">งบประมาณที่ได้รับ </th> -->
+                                                <th style="width: 15%" rowspan="2">รวมรายจ่าย ปีงบประมาณ {{$valyear->in_year}}</th> -->
+
+                                                <th style="width: 1.5%" rowspan="2">ลำดับ</th>
+                                                <th style="width: 7.5%" rowspan="2">รายงาน</th>
+                                                <th colspan="12">ไตรมาส 1 ปีงบประมาณ {{$valyear->in_year}}</th>
+                                                <th colspan="12">ไตรมาส 2 ปีงบประมาณ {{$valyear->in_year}}</th>
+                                                <th colspan="12">ไตรมาส 3 ปีงบประมาณ {{$valyear->in_year}}</th>
+                                                <th colspan="12">ไตรมาส 4 ปีงบประมาณ {{$valyear->in_year}}</th>
+                                                <th  style="width: 5%" rowspan="2" colspan="3">รวมรายจ่าย ปีงบประมาณ {{$valyear->in_year}}</th>
                                             </tr>
                                             <tr>
-                                                <th style="width: 5%">ต.ค. {{$valyear->in_year - 1}}</th>
-                                                <th style="width: 5%">พ.ย. {{$valyear->in_year - 1}}</th>
-                                                <th style="width: 5%">ธ.ค. {{$valyear->in_year - 1}}</th>
-                                                <th style="width: 5%">รวมไตรมาส</th>
-                                                <th style="width: 5%">ม.ค. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">ก.พ. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">มี.ค {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">รวมไตรมาส</th>
-                                                <th style="width: 5%">เม.ย. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">พ.ค. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">มิ.ย. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">รวมไตรมาส</th>
-                                                <th style="width: 5%">ก.ค. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">ส.ค. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">ก.ย. {{$valyear->in_year}}</th>
-                                                <th style="width: 5%">รวมไตรมาส</th>
+                                                <th colspan="3">ต.ค. {{$valyear->in_year - 1}}</th>
+                                                <th colspan="3">พ.ย. {{$valyear->in_year - 1}}</th>
+                                                <th colspan="3">ธ.ค. {{$valyear->in_year - 1}}</th>
+                                                <th colspan="3">รวมไตรมาส</th>
+
+                                                <th colspan="3">ม.ค. {{$valyear->in_year}}</th>
+                                                <th colspan="3">ก.พ. {{$valyear->in_year}}</th>
+                                                <th colspan="3">มี.ค {{$valyear->in_year}}</th>
+                                                <th colspan="3">รวมไตรมาส</th>
+
+                                                <th colspan="3">เม.ย. {{$valyear->in_year}}</th>
+                                                <th colspan="3">พ.ค. {{$valyear->in_year}}</th>
+                                                <th colspan="3">มิ.ย. {{$valyear->in_year}}</th>
+                                                <th colspan="3">รวมไตรมาส</th>
+
+                                                <th colspan="3">ก.ค. {{$valyear->in_year}}</th>
+                                                <th colspan="3">ส.ค. {{$valyear->in_year}}</th>
+                                                <th colspan="3">ก.ย. {{$valyear->in_year}}</th>
+                                                <th colspan="3">รวมไตรมาส</th>
                                             </tr>
                                         </thead>
 
@@ -168,24 +200,66 @@
                                                 <td class="align-middle">{{$item['name']}}</td>
                                                 @if (!empty($valdetails))
                                                 @foreach ($valdetails as $valdetail)
-                                                    <td style="width: 5%">{{number_format($valdetail['month_10'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_11'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_12'])}}</td>
-                                                    <td style="width: 5%"><?php echo $valdetail['month_10'] + $valdetail['month_11'] + $valdetail['month_12']?></td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_1'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_2'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_3'])}}</td>
-                                                    <td style="width: 5%"><?php echo number_format($valdetail['month_1'] + $valdetail['month_2'] + $valdetail['month_3'])?></td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_4'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_5'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_6'])}}</td>
-                                                    <td style="width: 5%"><?php echo number_format($valdetail['month_4'] + $valdetail['month_5'] + $valdetail['month_6'])?></td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_7'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_8'])}}</td>
-                                                    <td style="width: 5%">{{number_format($valdetail['month_9'])}}</td>
-                                                    <td style="width: 5%"><?php echo number_format($valdetail['month_7'] + $valdetail['month_8'] + $valdetail['month_9'])?></td>
-                                                    <td style="width: 5%"><?php echo number_format($valdetail['month_10'] + $valdetail['month_11'] + $valdetail['month_12'] + $valdetail['month_1'] + $valdetail['month_2'] + $valdetail['month_3'] + $valdetail['month_4'] + $valdetail['month_5'] + $valdetail['month_6'] + $valdetail['month_7'] + $valdetail['month_8'] + $valdetail['month_9'])?></td>
-                                                @endforeach
+
+                                                    <td class="bg-p"style="width: 2%">{{number_format($valdetail['month_10'])}}</td>
+                                                    <td class="bg-a"></td></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_11'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_12'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%"><?php echo $valdetail['month_10'] + $valdetail['month_11'] + $valdetail['month_12']?></td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_1'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_2'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_3'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td style="width: 2%"><?php echo number_format($valdetail['month_1'] + $valdetail['month_2'] + $valdetail['month_3'])?></td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_4'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_5'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_6'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%"><?php echo number_format($valdetail['month_4'] + $valdetail['month_5'] + $valdetail['month_6'])?></td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                   
+                                                   
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_7'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_8'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%">{{number_format($valdetail['month_9'])}}</td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    <td class="bg-p" style="width: 2%"><?php echo number_format($valdetail['month_7'] + $valdetail['month_8'] + $valdetail['month_9'])?></td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    
+                                                    
+                                                    <td class="bg-p" style="width: 2%"><?php echo number_format($valdetail['month_10'] + $valdetail['month_11'] + $valdetail['month_12'] + $valdetail['month_1'] + $valdetail['month_2'] + $valdetail['month_3'] + $valdetail['month_4'] + $valdetail['month_5'] + $valdetail['month_6'] + $valdetail['month_7'] + $valdetail['month_8'] + $valdetail['month_9'])?></td>
+                                                    <td class="bg-a"></td>
+                                                    <td class="bg-df"></td>
+                                                    @endforeach
                                                 @endif
                                             </tr> 
                                         </tbody>

@@ -33,7 +33,6 @@
                 <div class="card-box">
                     <h4 class="header-title mb-4"><i class="mdi mdi-file-document-box-plus" style="font-size: 16px !important; "> ตั้งงบประมาณ</i> </h4>
 
-                   
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="edit_id" value="0">
 

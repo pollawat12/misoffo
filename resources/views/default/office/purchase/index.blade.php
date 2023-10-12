@@ -5,6 +5,7 @@
 <link href="{{url('assets/default')}}/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
 <link href="{{url('assets/default')}}/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
 <link href="{{url('assets/default')}}/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+<link href="{{ url('assets/js/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 
@@ -98,11 +99,11 @@
                                             <i class="mdi mdi-pencil-outline"></i> แก้ไข
                                         </button>
                                     </a> -->
-                                    <a href="{{URL('office/purchase/delete')}}/{{$item['id']}}?t=1&pr=0">
-                                        <button type="button" class="btn btn-danger waves-effect width-md waves-light">
+                                    <!-- <a href="{{URL('office/purchase/delete')}}/{{$item['id']}}?t=1&pr=0" id=""> -->
+                                        <button type="button" class="btn btn-danger waves-effect width-md waves-light" id="b_del" value="{{$item['id']}}">
                                             <i class="mdi mdi-trash-can-outline"></i> ลบ
                                         </button>
-                                    </a>
+                                    <!-- </a> -->
                                 </td>
                             </tr>
                             @endforeach
@@ -134,6 +135,7 @@
 <!-- Responsive examples -->
 <script src="{{url('assets/default')}}/libs/datatables/dataTables.responsive.min.js"></script>
 <script src="{{url('assets/default')}}/libs/datatables/responsive.bootstrap4.min.js"></script>
+<script src="{{url('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 
 <script>
     $(document).ready(function () {
@@ -204,5 +206,37 @@
 
         }  
     });
+
+
+    $(document).on("click", "#b_del", function() {
+         var _itemValue = $(this).val();
+        // var _id = $("#year_id").val();
+        // $('#loadtype1').load('{{URL('office/expenses/loadtype1')}}' + '/' + _itemValue + '/' + _id);
+        // alert("ddddd")
+       swal({
+                title: "แจ้งเตือน",
+                text: "คุณแน่ใจต้องการลบรายการนี้?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก",
+                closeOnConfirm: false
+            },
+            function(isConfirm){
+                console.log(isConfirm)
+                if (isConfirm){
+                    //swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
+                    //swal("Shortlisted!",_itemValue, "success");
+                    window.location="{{URL('office/purchase/delete')}}/"+ _itemValue + "?t=1&pr=0" ;
+                   //alert()
+                } else {
+                    //{{-- <a href="{{URL('office/budgets/institution')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}"--}}
+                    //{{--  window.location='{{URL('office/budgets/institution')}}/?yearid={{$yearid}}&budgetsid={{$budgetsid}}&id={{$id}}'; --}}
+                }
+            });
+    });
+
+
 </script>
 @endsection
