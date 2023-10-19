@@ -99,7 +99,11 @@ class Purchases extends Model
         $process->sort_order = (int) 1;
         $process->purchases_name = trim($data['purchases_name']);
         $process->purchases_order_number = trim($data['purchases_order_number']);
+        // $process->purchases_order_number = trim($data['purchases_order_number_no2']);
+        // $process->purchases_order_number = trim($data['purchases_order_number_no3']);
+        // $process->purchases_order_number = trim($data['purchases_order_number_no4']);
         $process->purchases_invoice_date = isset($data['purchases_invoice_date'])  ? getInputDateToDB($data['purchases_invoice_date']) : NULL;
+        $process->purchases_invoice_date = isset($data['purchases_invoice_date_2'])  ? getInputDateToDB($data['purchases_invoice_date_2']) : NULL;
         $process->purchases_allocated_budget = isset($data['purchases_allocated_budget'])  ? trim($data['purchases_allocated_budget']) : '0.00';
         $process->purchases_refer = isset($data['purchases_refer'])  ? trim($data['purchases_refer']) : '';
         $process->purchases_board = isset($data['purchases_board'])  ? trim($data['purchases_board']) : '';
@@ -120,7 +124,7 @@ class Purchases extends Model
         $process->parent_id = (int) 0;
         $process->sort_order = (int) 1;
         $process->purchases_name = trim($data['purchases_name']);
-        $process->purchases_order_number = trim($data['purchases_order_number']);
+        $process->purchases_order_number = trim($data['purchases_order_number_no2']);
         $process->purchases_invoice_date_2 = isset($data['purchases_invoice_date_2'])  ? getInputDateToDB($data['purchases_invoice_date_2']) : NULL;
         $process->purchases_middle_price = isset($data['purchases_middle_price'])  ? trim($data['purchases_middle_price']) : '0.00';
         $process->purchases_method = isset($data['purchases_method'])  ? trim($data['purchases_method']) : '';
@@ -139,7 +143,8 @@ class Purchases extends Model
         $process->parent_id = (int) 0;
         $process->sort_order = (int) 1;
         $process->purchases_name = trim($data['purchases_name']);
-        $process->purchases_order_number = trim($data['purchases_order_number']);
+        // $process->purchases_order_number = trim($data['purchases_order_number']);
+        $process->purchases_order_number = trim($data['purchases_order_number_no3']);
         $process->purchases_invoice_date_3 = isset($data['purchases_invoice_date_3'])  ? getInputDateToDB($data['purchases_invoice_date_3']) : NULL;
         $process->purchases_offer_price = isset($data['purchases_offer_price'])  ? trim($data['purchases_offer_price']) : '0.00';
         $process->purchases_offer_name = isset($data['purchases_offer_name'])  ? trim($data['purchases_offer_name']) : '';
@@ -156,7 +161,7 @@ class Purchases extends Model
         $process->parent_id = (int) 0;
         $process->sort_order = (int) 1;
         $process->purchases_name = trim($data['purchases_name']);
-        $process->purchases_order_number = trim($data['purchases_order_number']);
+        $process->purchases_order_number = trim($data['purchases_order_number_no4']);
         $process->purchases_invoice_date_4 = isset($data['purchases_invoice_date_4'])  ? getInputDateToDB($data['purchases_invoice_date_4']) : NULL;
         $process->purchases_category_contract = isset($data['purchases_category_contract'])  ? trim($data['purchases_category_contract']) : 0;
         $process->purchases_pair_contract = isset($data['purchases_pair_contract'])  ? trim($data['purchases_pair_contract']) : '';
@@ -217,5 +222,4 @@ class Purchases extends Model
         
         return $process->save();
     }
-
 }

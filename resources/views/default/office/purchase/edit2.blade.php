@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label for="inputEmail4" class="col-form-label label-step">บันทึกเลขที่
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="inputEmail4" name="input[purchases_order_number]" placeholder="" style="height: 45px;" value="{{$info->purchases_order_number}}">
+                                        <input type="text" class="form-control" id="inputEmail4" name="input[purchases_order_number_no2]" placeholder="" style="height: 45px;" value="{{$info->purchases_order_number}}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -84,18 +84,16 @@
                                     </div>
                                 </div>
                                 
-
                                 <!-- คณะกรรมการซื้อ/จ้าง -->
                                 <div class="col-lg-12">
                                     <div class="label-step mt-3 mb-2">คณะกรรมการซื้อ/จ้าง <span class="text-danger">*</span></div>
                                     <div class="custom-control custom-checkbox mb-2">
-                                        <input type="radio" class="custom-control-input" id="Check1" name="input[purchases_board_buy]" value="1" @if(1 == $info->purchases_board_buy) checked @endif>
+                                        <input type="radio" class="custom-control-input" id="Check1" name="input[purchases_board_buy]" value="0" checked @if(0 == $info->purchases_board_buy) checked @endif>
                                         <label class="custom-control-label" for="Check1">ไม่มี</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
-                                        <input type="radio" class="custom-control-input" id="Check2" name="input[purchases_board_buy]" value="2" @if(2 == $info->purchases_board_buy) checked @endif>
-                                        <label class="custom-control-label" for="Check2">มี ระบุ จำนวน .....
-                                            คน</label>
+                                        <input type="radio" class="custom-control-input" id="Check2" name="input[purchases_board_buy]" value="1" @if(1 == $info->purchases_board_buy) checked @endif>
+                                        <label class="custom-control-label" for="Check2">มี ระบุ</label>
                                     </div>
 
                                     <div class="title-aad-name mt-2 mb-2">
@@ -160,17 +158,16 @@
                                     </div>
                                 </div>
 
-                                    <!-- คณะกรรมการตรวจรับ -->
-                                    <div class="col-lg-12">
-                                    <div class="label-step mb-2">คณะกรรมการตรวจรับ <span class="text-danger">*</span></div>
+                                <!-- คณะกรรมการตรวจรับ -->
+                                <div class="col-lg-12">
+                                    <div class="label-step mt-3 mb-2">คณะกรรมการตรวจรับ <span class="text-danger">*</span></div>
                                     <div class="custom-control custom-checkbox mb-2">
-                                        <input type="radio" class="custom-control-input" id="Check1" name="input[purchases_board_check]" value="0" @if(0 == $info->purchases_board_check) checked @endif>
+                                        <input type="radio" class="custom-control-input" id="Check1" name="input[purchases_board_check]" checked value="0" @if(0 == $info->purchases_board_check) checked @endif>
                                         <label class="custom-control-label" for="Check1">ไม่มี</label>
                                     </div>
                                     <div class="custom-control custom-checkbox">
                                         <input type="radio" class="custom-control-input" id="Check2" name="input[purchases_board_check]" value="1" @if(1 == $info->purchases_board_check) checked @endif>
-                                        <label class="custom-control-label" for="Check2">มี ระบุ จำนวน .....
-                                            คน</label>
+                                        <label class="custom-control-label" for="Check2">มี ระบุ</label>
                                     </div>
 
                                     <div class="title-aad-name mt-2 mb-2">
@@ -179,7 +176,6 @@
                                             <i class="mdi mdi-plus"></i> เพิ่มรายชื่อ
                                         </button>
                                     </div>
-                                    
 
                                     <div class="table-responsive">
                                         <table class="table table-bordered mb-0 input_fields_wrap2">
@@ -315,6 +311,25 @@
                 'input[purchases_name]': {
                     required: true
                 },
+                'input[purchases_order_number_no2]': {
+                    required: true
+                },
+                'input[purchases_invoice_date_2]': {
+                    required: true
+                },
+                'input[purchases_middle_price]': {
+                    required: true
+                },
+                'input[purchases_method]': {
+                    required: true
+                },
+                'input[purchases_board_buy]': {
+                    required: true
+                },
+                'purchases_file3': {
+                    required: true
+                },
+                
                 // 'input[durable_serial]': {
                 //     required: true
                 // },
@@ -338,6 +353,24 @@
                 'input[purchases_name]': {
                     required: "กรุณากรอกเรื่อง"
                 },
+                'input[purchases_order_number_no2]': {
+                    required: "กรุณากรอกบันทึกเลขที่"
+                },
+                'input[purchases_invoice_date_2]': {
+                    required: "กรุณากรอกวันที่"
+                },
+                'input[purchases_middle_price]': {
+                    required: "กรุณากรอกราคากลาง"
+                },
+                'input[purchases_method]': {
+                    required: "กรุณากรอกวิธีซื้อจ้าง"
+                },
+                'input[purchases_board_buy]': {
+                    required: "กรุณาเลือก"
+                },
+                'purchases_file3': {
+                    required: "กรุณาแบลไฟล์"
+                },
                 // 'input[durable_serial]': {
                 //     required: "กรุณากรอก Serial Number"
                 // },
@@ -357,6 +390,7 @@
                 //     required: "กรุณากรอก ใบจัดซื้อ-จัดจ้าง"
                 // }
             },
+
             errorElement: 'span',
             errorPlacement: function (error, element) {
                 error.addClass('invalid-feedback');

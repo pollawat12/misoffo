@@ -47,7 +47,7 @@ class PurchasesOfficer extends Model
         return $array;
     }
 
-
+   
     public static function inserRow($purchasesid , $positionid , $groupsid , $returnId=false)
     {
         

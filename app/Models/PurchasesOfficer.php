@@ -85,7 +85,7 @@ class PurchasesOfficer extends Model
         return $process->save();
     }
 
-    public static function deleteRow($id=0)
+    public static function deleteRow($id)
     {
         $process = self::find((int) $id);
         

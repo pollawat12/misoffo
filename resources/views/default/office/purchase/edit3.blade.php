@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label for="inputEmail4" class="col-form-label label-step">บันทึกเลขที่
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="inputEmail4" placeholder="" style="height: 45px;" name="input[purchases_order_number]" value="{{$info->purchases_order_number}}">
+                                        <input type="text" class="form-control" id="inputEmail4" placeholder="" style="height: 45px;" name="input[purchases_order_number_no3]" value="{{$info->purchases_order_number}}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -83,11 +83,11 @@
                                             <label for="inputEmail4"
                                                 class="col-form-label label-step">ผู้ชนะการเสนอราคา <span
                                                     class="text-danger">*</span></label>
-                                                    <div class="pad-cus">
+                                                    {{-- <div class="pad-cus">
                                                         <button type="button" class="btn btn-info pt-1 pb-1" data-toggle="modal" data-target="#con-close-modal"><i
                                                             class="mdi mdi-plus font-8">
                                                             เพิ่มบริษัท/ผู้ค้า</i></button>
-                                                    </div>
+                                                    </div> --}}
                                             
                                         </div>
 
@@ -113,7 +113,8 @@
                                     <div for="inputEmail4" class="col-form-label label-step">แนบไฟล์ <span
                                             class="text-danger">*</span></div>
                                     <div class="form-group">
-                                        <input type="file" class="filestyle" name="purchases_file4" id="filestyleicon">
+                                        <input type="file" class="filestyle" name="purchases_file4" id="filestyleicon">    
+                                                                          
                                     </div>
                                     <div class="comment-file">
                                         แนบได้มากกว่า 1 ไฟล์ เช่น รายงานผลการพิจารณาคัดเลือก, ประกาศผู้ชนะการเสนอราคา ฯลฯ
@@ -289,6 +290,22 @@
                 'input[purchases_name]': {
                     required: true
                 },
+                'input[purchases_order_number_no3]': {
+                    required: true
+                },
+                'input[purchases_invoice_date_3]': {
+                    required: true
+                },
+                'input[purchases_offer_name]': {
+                    required: true
+                },
+                'input[purchases_offer_price]': {
+                    required: true
+                },
+                'purchases_file4': {
+                    required: true
+                },
+
                 // 'input[durable_serial]': {
                 //     required: true
                 // },
@@ -312,6 +329,22 @@
                 'input[purchases_name]': {
                     required: "กรุณากรอกเรื่อง"
                 },
+                'input[purchases_order_number_no3]': {
+                    required: "กรุณากรอกบันทึกเลขที่"
+                },
+                'input[purchases_invoice_date_3]': {
+                    required: "กรุณากรอกวันที่"
+                },
+                'input[purchases_offer_name]': {
+                    required: "กรุณาเลือก"
+                },
+                'input[purchases_offer_price]': {
+                    required: "กรุณากรอกราคาที่ตกลงซื้อจ้าง"
+                },
+                'purchases_file4': {
+                    required: "กรุณาแนบไฟล์"
+                },
+
                 // 'input[durable_serial]': {
                 //     required: "กรุณากรอก Serial Number"
                 // },

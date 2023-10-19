@@ -233,8 +233,7 @@
                                     </div>
                                     <div class="custom-control custom-checkbox">
                                         <input type="radio" name="input[purchases_board]" class="custom-control-input" id="Check2" value="1" @if(1 == $info->purchases_board) checked @endif>
-                                        <label class="custom-control-label" for="Check2">มี ระบุ จำนวน .....
-                                            คน</label>
+                                        <label class="custom-control-label" for="Check2">มี</label>
                                     </div>
 
                                     
@@ -265,7 +264,7 @@
                                                             <tr>
                                                                 <!-- <td class="text-center">1</td> -->
                                                                 <td>
-                                                                    <select name="purchases_inspector[9][]" id="purchases_inspector" class="form-control" style="height: 45px;">
+                                                                    <select name="purchases_inspector[1][]" id="purchases_inspector" class="form-control" style="height: 45px;">
                                                                         <option value="">--เลือก--</option>
                                                                         @if (count($employees) > 0)
                                                                         @foreach($employees as $valemployees)
@@ -275,7 +274,7 @@
                                                                     </select>
                                                                 </td>
                                                                 <td>
-                                                                    <select name="position_id[9][]" id="position_id" class="form-control" style="height: 45px;">
+                                                                    <select name="position_id[1][]" id="position_id" class="form-control" style="height: 45px;">
                                                                         <option value="">--เลือก--</option>
                                                                         <option value="1" @if(1 == $purchasesOfficer->position_id) selected @endif>ประธานกรรมการ</option>
                                                                         <option value="2" @if(2 == $purchasesOfficer->position_id) selected @endif>กรรมการ</option>
@@ -401,26 +400,32 @@
             },
             messages: {
                 'input[purchases_name]': {
-                    required: "กรุณากรอกเรื่อง"
+                    required: "กรุณากรอกชื่อเรื่อง"
                 },
-                // 'input[durable_serial]': {
-                //     required: "กรุณากรอก Serial Number"
+                // 'input[purchases_order_number]': {
+                //     required: "กรุณากรอก บันทึกเลขที่"
                 // },
-                // 'input[category_id]': {
-                //     required: "กรุณาเลือก หมวดหมู่"
+                // 'input[purchases_invoice_date]': {
+                //     required: "กรุณากรอก วันที่"
                 // },
-                // 'input[typedata_id]': {
-                //     required: "กรุณาเลือก ประเภท"
+                // 'input[purchases_allocated_budget]': {
+                //     required: "กรุณากรอก งบประมาณที่ได้รับ"
                 // },
-                // 'input[unitcount_id]': {
-                //     required: "กรุณาเลือก หน่วยนับ"
+                // 'input[year_id]]': {
+                //     required: "กรุณากรอก ปีงบประมาณ"
                 // },
-                // 'input[durable_received_date]': {
-                //     required: "กรุณากรอก วันที่ได้รับ"
+                // 'input[institution_id]': {
+                //     required: "กรุณากรอก หน่วยงาน"
                 // },
-                // 'input[durable_purchase]': {
-                //     required: "กรุณากรอก ใบจัดซื้อ-จัดจ้าง"
-                // }
+                // 'input[budget_categroy]': {
+                //     required: "กรุณากรอก ประเภทงบ"
+                // },
+                // 'input[budget_type]': {
+                //     required: "กรุณากรอก ประเภทค่าใช้จ่าย"
+                // },
+                // 'input[purchases_refer]': {
+                //     required: "กรุณากรอก รายการค่าใช่จ่าย "
+                }
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -447,7 +452,7 @@
 $(document).on('change', '#year_id', function(params) {
     let values = $(this).val();
 
-    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=yearNew&id=" + values + '&parentId=489';
+    var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/info/?t=yearNew&id=" + values + '&parentId=488';
 
     $("#institution_id").html('<option value="">--เลือก--</option>');
     $.get(_url, function(data){

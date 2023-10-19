@@ -52,28 +52,46 @@
                                     <span class="text-danger">*</span></label>
                                 <div class="form-inline mb-2">
                                     <div class="form-group ml-2">
-                                        <div class="checkbox checkbox-primary">
+                                        <!-- new code -->
+                                        <div class="radio radio-primary">
+                                            <input id="radiobox1" type="radio" name="input[purchases_category_contract]" checked value="1" @if(1 == $info->purchases_category_contract) checked @endif>
+                                            <label for="radiobox1">
+                                                ใบสั่งซื้อสั่งจ้าง
+                                            </label>
+                                        </div>
+
+                                        <!-- old code -->
+                                        {{-- <div class="checkbox checkbox-primary">
                                             <input id="checkbox1" type="checkbox" name="input[purchases_category_contract]" value="1" @if(1 == $info->purchases_category_contract) checked @endif>
                                             <label for="checkbox1">
                                                 ใบสั่งซื้อสั่งจ้าง
                                             </label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="form-group ml-3">
-                                        <div class="checkbox checkbox-primary">
+                                        <!-- new code -->
+                                        <div class="radio radio-primary">
+                                            <input id="radiobox2" type="radio" name="input[purchases_category_contract]" value="2" @if(2 == $info->purchases_category_contract) checked @endif>
+                                            <label for="radiobox2">
+                                                สัญญา
+                                            </label>
+                                        </div>
+
+                                        <!-- old code -->
+                                        {{-- <div class="checkbox checkbox-primary">
                                             <input id="checkbox2" type="checkbox" name="input[purchases_category_contract]" value="2" @if(2 == $info->purchases_category_contract) checked @endif>
                                             <label for="checkbox2">
                                                 สัญญา
                                             </label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="inputEmail4" class="col-form-label label-step">เลขที่
+                                    <label for="inputEmail4" class="col-form-label label-step">บันทึกเลขที่
                                         <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="inputEmail4" placeholder="" style="height: 45px;" name="input[purchases_order_number]" value="{{$info->purchases_order_number}}">
+                                    <input type="text" class="form-control" id="inputEmail4" placeholder="" style="height: 45px;" name="input[purchases_order_number_no4]" value="{{$info->purchases_order_number}}">
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -91,7 +109,6 @@
                                 </div>
                             </div>
                             <?php
-                            
                                 $purchasesOfficers1 = \App\Models\BudgetCertificateCompany::find((int) $info->purchases_offer_name);
                             ?>
                             <div class="col-lg-3">
@@ -121,9 +138,9 @@
                                     <span class="text-danger">*</span></label>
                                 <div class="form-inline mb-2">
                                     <div class="form-group ml-2">
-                                        <div class="checkbox checkbox-primary">
-                                            <input id="checkbox3" type="checkbox" name="input[purchases_guarantee_contract]" value="1" @if(1 == $info->purchases_guarantee_contract) checked @endif>
-                                            <label for="checkbox3">
+                                        <div class="radio radio-primary">
+                                            <input id="radiobox3" type="radio" name="input[purchases_guarantee_contract]" value="1" @if(1 == $info->purchases_guarantee_contract) checked @endif>
+                                            <label for="radiobox3">
                                                 มี ระบุ
                                             </label>
                                         </div>
@@ -134,9 +151,9 @@
                                             placeholder="" style="height: 45px;" name="input[purchases_guarantee_price_contract]" value="{{$info->purchases_guarantee_price_contract}}">
                                     </div>
                                     <div class="form-group ml-3">
-                                        <div class="checkbox checkbox-primary">
-                                            <input id="checkbox4" type="checkbox" name="input[purchases_guarantee_contract]" value="2" @if(2 == $info->purchases_guarantee_contract) checked @endif>
-                                            <label for="checkbox4">
+                                        <div class="radio radio-primary">
+                                            <input id="radiobox4" type="radio" name="input[purchases_guarantee_contract]" value="2" checked @if(2 == $info->purchases_guarantee_contract) checked @endif>
+                                            <label for="radiobox4">
                                                 ไม่มี
                                             </label>
                                         </div>
@@ -149,9 +166,9 @@
                                     <span class="text-danger">*</span></label>
                                 <div class="form-inline mb-2">
                                     <div class="form-group ml-2">
-                                        <div class="checkbox checkbox-primary">
-                                            <input id="checkbox5" type="checkbox" name="input[purchases_guarantee_performance]" value="1" @if(1 == $info->purchases_guarantee_performance) checked @endif>
-                                            <label for="checkbox5">
+                                        <div class="radio radio-primary">
+                                            <input id="radiokbox5" type="radio" name="input[purchases_guarantee_performance]" value="1" @if(1 == $info->purchases_guarantee_performance) checked @endif>
+                                            <label for="radiobox5">
                                                 มี ระบุ
                                             </label>
                                         </div>
@@ -162,9 +179,9 @@
                                             placeholder="" style="height: 45px;" name="input[purchases_guarantee_price_performance]" value="{{$info->purchases_guarantee_price_performance}}">
                                     </div>
                                     <div class="form-group ml-3">
-                                        <div class="checkbox checkbox-primary">
-                                            <input id="checkbox6" type="checkbox" name="input[purchases_guarantee_performance]" value="2" @if(2 == $info->purchases_guarantee_performance) checked @endif>
-                                            <label for="checkbox6">
+                                        <div class="radio radio-primary">
+                                            <input id="radiobox6" type="radio" name="input[purchases_guarantee_performance]" value="2" checked @if(2 == $info->purchases_guarantee_performance) checked @endif>
+                                            <label for="radiobox6">
                                                 ไม่มี
                                             </label>
                                         </div>
@@ -178,9 +195,10 @@
                                     <span class="text-danger">*</span></label>
                                 <div class="form-inline mb-2">
                                     <div class="form-group ml-2">
-                                        <div class="checkbox checkbox-primary">
-                                            <input id="checkbox7" type="checkbox" name="input[purchases_installment]" value="1" @if(1 == $info->purchases_installment) checked @endif>
-                                            <label for="checkbox7">
+                                        <div class="radio radio-primary">
+                                        {{-- <div class="checkbox checkbox-primary"> --}}
+                                            <input id="radiobox7" type="radio" name="input[purchases_installment]" value="1" checked @if(1 == $info->purchases_installment) checked @endif>
+                                            <label for="radiobox7">
                                                 งวดเดียว วันที่ส่งมอบ
                                             </label>
                                         </div>
@@ -199,10 +217,11 @@
                                 </div>
                                 <div class="form-inline">
                                     <div class="form-group ml-2">
-                                        <div class="checkbox checkbox-primary">
-                                            <input id="checkbox8" type="checkbox" name="input[purchases_installment]" value="2" @if(2 == $info->purchases_installment) checked @endif>
-                                            <label for="checkbox8">
-                                                หลายงวด ระบุ จำนวน .... งวด
+                                        <div class="radio radio-primary">
+                                        {{-- <div class="checkbox checkbox-primary"> --}}
+                                            <input id="radiobox8" type="radio" name="input[purchases_installment]" value="2" @if(2 == $info->purchases_installment) checked @endif>
+                                            <label for="radiobox8">
+                                                หลายงวด ระบุ
                                             </label>
                                         </div>
                                     </div>
@@ -379,6 +398,37 @@
                 'input[purchases_name]': {
                     required: true
                 },
+                'input[purchases_category_contract]': {
+                    required: true
+                },
+                'input[purchases_order_number_no4]': {
+                    required: true
+                },
+                'input[purchases_invoice_date_4]': {
+                    required: true
+                },
+                'input[purchases_pair_contract]': {
+                    required: true
+                },
+                'input[purchases_num_contract]': {
+                    required: true
+                },
+                'input[purchases_add_contract]': {
+                    required: true
+                },
+                'input[purchases_guarantee_performance]': {
+                    required: true
+                },
+                'input[purchases_guarantee_performance]': {
+                    required: true
+                },
+                'input[purchases_installment]': {
+                    required: true
+                },
+                'input[purchases_file5]': {
+                    required: true
+                },
+                
                 // 'input[durable_serial]': {
                 //     required: true
                 // },
@@ -402,6 +452,37 @@
                 'input[purchases_name]': {
                     required: "กรุณากรอกเรื่อง"
                 },
+                'input[purchases_category_contract]': {
+                    required: "กรุณาเลือกประเภทสัญญา"
+                },
+                'input[purchases_order_number_no4]': {
+                    required: "กรุณากรอกบันทึกเลขที่"
+                },
+                'input[purchases_invoice_date_4]': {
+                    required: "กรุณากรอกวันที่"
+                },
+                'input[purchases_pair_contract]': {
+                    required: "กรุณากรอกคู่สัญญา"
+                },
+                'input[purchases_num_contract]': {
+                    required: "กรุณากรอกเลขที่บัญชี"
+                },
+                'input[purchases_add_contract]': {
+                    required: "กรุณากรอกที่อยู่"
+                },
+                'input[purchases_guarantee_performance]': {
+                    required: "กรุณาเลือกหลักประกันสัญญา"
+                },
+                'input[purchases_guarantee_performance]': {
+                    required: "กรุณาเลือกหลักประกันผลงาน"
+                },
+                'input[purchases_installment]': {
+                    required: "กรุณากำหนดส่งมอบงาน"
+                },
+                'input[purchases_file5]': {
+                    required: "กรุณาแนบไฟล์"
+                },
+
                 // 'input[durable_serial]': {
                 //     required: "กรุณากรอก Serial Number"
                 // },
@@ -443,7 +524,6 @@
 </script>
 <script type="text/javascript">
 
-
 $(document).ready(function() {
     
     var max_fields      = 20; //maximum input boxes allowed   
@@ -470,5 +550,19 @@ $(document).on('click', '.remove', function() {
     
     $(this).parent().parent().remove();
 });
+
+// $(document).on("change", "#purchases_pair_contract", function(){
+//     var _itemValue = $(this).val();
+    // var _id = $("#year_id").val();
+    // var _url = $("#base-url-api").attr("data-url") + "/office/expenses/project/get/projectDDl/?t=statementtypeNew&institutionId=" + _itemValue + '&yearID=' + _id + '&budgetId=488';
+    // var _url = $("#base-url-api").attr("data-url") + "/office/loadPurchase/{id}";
+    // $("#purchases_num_contract").html('<option value="">--เลือก--</option>'); 
+
+    // $("#budget_categroy").html('<option value="">--เลือก--</option>');
+//     $.get(_url, function(data){
+//         $("#purchases_num_contractget_categroy").html(data.elem_html);
+//     }, "json");
+// });
+
 </script>
 @endsection

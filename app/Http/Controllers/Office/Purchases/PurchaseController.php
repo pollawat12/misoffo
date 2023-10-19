@@ -104,8 +104,11 @@ class PurchaseController extends Base
             //$resp = ['status' => false, 'msg' =>  $data ];
             //return response()->json($resp, 200);
             $result = Purchases::inserRow($data , true);
-
+           
             $inspector = $purchases_inspector[1];
+
+            //return response()->json($result, 200);
+
 
             $position = $position_id[1];
 
@@ -206,6 +209,11 @@ class PurchaseController extends Base
      */
     public function update(Request $request)
     {
+       // return response()->json($request, 200);
+        //$data = $request;
+        //return response()->json($data['xxxx2'] , 200);
+
+
         $resp = ['status' => false, 'msg' => 'error!'];
 
         if ($request->ajax() && $request->isMethod('post')) {
@@ -218,24 +226,37 @@ class PurchaseController extends Base
             // $process = PurchasesOfficer::where('purchases_id', $id)->delete();
 
             if($data['purchases_status'] == 1){
+               
                 $purchases_inspector = $request->purchases_inspector;
                 $position_id = $request->position_id;
 
                 $result = Purchases::updateRow($data, $id);
-                //return response()->json($purchases_inspector, 200);
-
+              
+              
                 $inspector = $purchases_inspector[1];
+
 
                 $position = $position_id[1];
 
+            
+
                 $numinspector = count($inspector);
 
+                
+                // PurchasesOfficer::deleteRow($id);
+
+                //
                 for ($i=0; $i < $numinspector; $i++) { 
                     if($inspector[$i] != '' && $position[$i] != ''){
-                        $resultDetail = PurchasesOfficer::inserRow($inspector[$i] , $position[$i] , 1 , $result);
+                        $resultDetail = PurchasesOfficer::inserRow($inspector[$i] , $position[$i] , 1 , $id);
+                        // $resultDetail = PurchasesOfficer::inserRow($inspector[$i] , $position[$i] , 1 , $result);
                     }
                 }
+
+               // return response()->json($id, 200);
                // return response()->json($numinspector, 200);
+
+               
 
             }elseif($data['purchases_status'] == 2){
 
@@ -250,24 +271,26 @@ class PurchaseController extends Base
 
                 $numinspector = count($inspector);
 
+                //$result = true;
+
                 for ($i=0; $i < $numinspector; $i++) { 
                     if($inspector[$i] != '' && $position[$i] != ''){
                         $resultDetail = PurchasesOfficer::inserRow($inspector[$i] , $position[$i] , 2 , $result);
                     }
                 }
 
+                // $inspector3 = $purchases_inspector[3];
 
-                $inspector3 = $purchases_inspector[3];
+                // $position3 = $position_id[3];
 
-                $position3 = $position_id[3];
+                // $numinspector3 = count($inspector3);
 
-                $numinspector3 = count($inspector3);
+                // for ($i=0; $i < $numinspector3; $i++) { 
+                //     if($inspector3[$i] != '' && $position3[$i] != ''){
+                //         $resultDetail3 = PurchasesOfficer::inserRow($inspector[$i] , $position3[$i] , 3 , $result);
+                //     }
+                // }
 
-                for ($i=0; $i < $numinspector3; $i++) { 
-                    if($inspector3[$i] != '' && $position3[$i] != ''){
-                        $resultDetail3 = PurchasesOfficer::inserRow($inspector[$i] , $position3[$i] , 3 , $result);
-                    }
-                }
             }elseif($data['purchases_status'] == 3){
 
                 $result = Purchases::updateRow3($data, $id);
@@ -289,12 +312,19 @@ class PurchaseController extends Base
                 $installment_money = $installment_moneyN[1];
 
                 $numinspector = count($installment);
+               
+      
 
                 for ($i=0; $i < $numinspector; $i++) { 
                     if($installment[$i] != '' && $installment_money[$i] != ''){
-                        $resultDetail = PurchasesInstallment::inserRow($installment[$i] , $detail[$i] , $installment_date[$i] , $installment_money[$i] , 1 , $result);
+                        $resultDetail = PurchasesInstallment::inserRow($installment[$i] , $detail[$i] , $installment_date[$i] , $installment_money[$i] , 1 , $result , $id);
                     }
                 }
+
+                  
+                // $resp = ['status' => false, 'msg' =>  $id];               
+                // return response()->json($resp, 200);
+
 
 
             }elseif($data['purchases_status'] == 5){

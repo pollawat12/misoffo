@@ -340,6 +340,8 @@
 
     $('#button_add').click(function(){ 
 
+        
+
         function callBackFuncInsertFamily(data) {
             var alertType = 'error';
             var alertTitle = 'แจ้งเตือน';

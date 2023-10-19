@@ -52,13 +52,13 @@ class PurchasesInstallment extends Model
     }
 
 
-    public static function inserRow($installment , $detail , $installment_date  , $installment_money , $groupsid , $returnId=false)
+    public static function inserRow($installment , $detail , $installment_date  , $installment_money , $groupsid , $returnId=false , $purchasesId = 0)
     {
         
         $process = new self;
         $process->parent_id = (int) 0;
         $process->sort_order = (int) 1;
-        $process->purchases_id = $returnId;
+        $process->purchases_id = $purchasesId ;
         $process->group_id = $groupsid;
         $process->installment = $installment;
         $process->detail = $detail;
